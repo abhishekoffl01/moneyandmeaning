@@ -1,363 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Browse all articles on investing, economics, business psychology, and financial philosophy — Money and Meaning."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* Reading progress bar */
-    #readProgress{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:9999;width:0;transition:width .1s}
-  </style>
-  <title>Articles — Money and Meaning</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="All Articles — Money and Meaning. Economics, Markets, Business, and Ideas shaping the modern world. Independent editorial finance and business writing."/>
+<meta property="og:title" content="Articles — Money and Meaning"/>
+<meta property="og:description" content="Browse all articles on economics, markets, investing, business, and the big ideas shaping the modern world."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── ARTICLES PAGE ONLY ── */
+
+/* Page hero — compact, no canvas/grid */
+.page-hero{
+  padding:160px 0 80px;
+  background:var(--bg-1);
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(191,160,90,.06) 0%,transparent 65%),
+             radial-gradient(ellipse 40% 60% at 80% 20%,rgba(191,160,90,.04) 0%,transparent 60%);
+}
+.page-hero-inner{
+  position:relative;z-index:1;
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;
+}
+.page-hero-kicker{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:20px;
+}
+.page-hero-kicker::before{content:'';width:20px;height:1px;background:var(--gold)}
+.page-hero-title{
+  font-family:var(--ff-serif);
+  font-size:clamp(48px,6.5vw,80px);
+  font-weight:900;line-height:.96;letter-spacing:-.04em;color:var(--ink);
+}
+.page-hero-title em{color:var(--gold);font-style:italic}
+.page-hero-sub{
+  font-size:clamp(14px,1.5vw,17px);line-height:1.85;color:var(--ink-2);
+  max-width:480px;margin-top:20px;
+}
+.page-hero-right{text-align:right;flex-shrink:0}
+.page-hero-count{
+  font-family:var(--ff-serif);font-size:clamp(56px,8vw,110px);
+  font-weight:900;color:transparent;line-height:1;letter-spacing:-.04em;
+  -webkit-text-stroke:1px rgba(191,160,90,.2);
+}
+.page-hero-count-label{
+  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:4px;text-align:right;
+}
+
+/* Search bar */
+.search-bar-wrap{
+  background:var(--bg);border-bottom:1px solid var(--border);
+  padding:20px 0;position:sticky;top:68px;z-index:100;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.search-bar-inner{
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;gap:16px;
+}
+.search-input-wrap{
+  flex:1;display:flex;align-items:center;gap:12px;
+  background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r);
+  padding:0 16px;
+  transition:border-color var(--t);
+}
+.search-input-wrap:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim)}
+.search-icon{color:var(--ink-3);font-size:15px;flex-shrink:0}
+.search-input{
+  flex:1;background:none;border:none;
+  padding:13px 0;font-size:14px;color:var(--ink);outline:none;
+  font-family:var(--ff-sans);
+}
+.search-input::placeholder{color:var(--ink-3)}
+
+/* Filter pills */
+.filter-pills{display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.filter-pills::-webkit-scrollbar{display:none}
+.filter-pill{
+  white-space:nowrap;padding:8px 16px;border-radius:100px;
+  border:1px solid var(--border);background:none;
+  font-size:12px;font-weight:500;color:var(--ink-2);letter-spacing:.04em;
+  cursor:none;transition:all var(--t) var(--ease);
+  font-family:var(--ff-sans);
+}
+.filter-pill:hover{border-color:var(--gold-line);color:var(--ink)}
+.filter-pill.active{background:var(--gold);color:#07070A;border-color:var(--gold);font-weight:600}
+
+/* Featured article — full width editorial */
+.featured-article{
+  background:var(--bg-1);
+  border-bottom:1px solid var(--border);
+}
+.fa-inner{
+  max-width:var(--max);margin:0 auto;padding:80px 32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+}
+.fa-img-wrap{position:relative;border-radius:var(--r2);overflow:hidden}
+.fa-img-wrap img{
+  width:100%;height:460px;object-fit:cover;display:block;
+  transition:transform .6s var(--ease);
+}
+.fa-img-wrap:hover img{transform:scale(1.03)}
+.fa-img-badge{
+  position:absolute;top:16px;left:16px;
+  font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#07070A;background:var(--gold);padding:5px 12px;border-radius:100px;
+}
+.fa-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(13,13,18,.6) 0%,transparent 50%);
+}
+.fa-content{display:flex;flex-direction:column;gap:20px}
+.fa-cat{
+  font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:8px;
+}
+.fa-cat::before{content:'';width:16px;height:1px;background:var(--gold)}
+.fa-title{
+  font-family:var(--ff-serif);
+  font-size:clamp(26px,3vw,40px);font-weight:700;line-height:1.12;
+  letter-spacing:-.03em;color:var(--ink);
+  transition:color var(--t);
+}
+.fa-title:hover{color:var(--gold-lt)}
+.fa-excerpt{font-size:16px;line-height:1.85;color:var(--ink-2)}
+.fa-meta{
+  display:flex;align-items:center;gap:16px;
+  padding-top:16px;border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.fa-meta-left{display:flex;align-items:center;gap:10px}
+.fa-avatar{
+  width:36px;height:36px;border-radius:50%;overflow:hidden;border:1px solid var(--gold-line);flex-shrink:0;
+}
+.fa-avatar img{width:100%;height:100%;object-fit:cover}
+.fa-author-name{font-size:13px;font-weight:600;color:var(--ink);display:block;line-height:1.2}
+.fa-date{font-size:11px;color:var(--ink-3)}
+.fa-right-meta{display:flex;align-items:center;gap:12px;margin-left:auto;font-size:12px;color:var(--ink-3)}
+.fa-read-time{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 14px;border:1px solid var(--border);border-radius:100px;
+  font-size:11px;font-weight:500;color:var(--ink-2);
+}
+.fa-read-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;background:var(--gold);color:#07070A;
+  border-radius:var(--r);font-size:13px;font-weight:700;letter-spacing:.04em;
+  transition:all var(--t) var(--ease);margin-top:8px;align-self:flex-start;
+}
+.fa-read-btn:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 10px 32px rgba(191,160,90,.3)}
+.fa-read-btn svg{width:16px;height:16px;transition:transform var(--t)}
+.fa-read-btn:hover svg{transform:translateX(3px)}
+
+/* Categories strip */
+.cat-strip{
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:56px 0;
+}
+.cat-strip-inner{max-width:var(--max);margin:0 auto;padding:0 32px}
+.cat-strip-head{margin-bottom:36px}
+.cat-tiles-row{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:12px;
+}
+.cat-tile-sm{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:20px 14px;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);
+  transition:all var(--t) var(--ease);cursor:none;text-align:center;
+}
+.cat-tile-sm:hover{border-color:var(--border-h);background:var(--bg-card-h);transform:translateY(-3px)}
+.cat-tile-sm-icon{font-size:22px;line-height:1}
+.cat-tile-sm-name{font-size:12px;font-weight:600;color:var(--ink);letter-spacing:.04em}
+.cat-tile-sm-count{font-size:10px;color:var(--gold);font-weight:500;letter-spacing:.08em}
+
+/* Main articles grid */
+.articles-main{background:var(--bg-1)}
+.articles-main-inner{max-width:var(--max);margin:0 auto;padding:80px 32px}
+
+/* 3-col grid — reuses .art-card from homepage */
+.art-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+
+/* Trending sidebar layout */
+.articles-layout{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start}
+
+/* Trending sidebar */
+.trending-sidebar{}
+.trending-label{
+  font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold);padding-bottom:16px;border-bottom:1px solid var(--border);
+  margin-bottom:24px;display:flex;align-items:center;gap:10px;
+}
+.trending-label::before{content:'';width:16px;height:1px;background:var(--gold)}
+.trending-list{display:flex;flex-direction:column;gap:2px}
+.trending-item{
+  display:flex;gap:16px;padding:18px 0;
+  border-bottom:1px solid var(--border);
+  cursor:none;transition:background var(--t);
+}
+.trending-item:last-child{border-bottom:none}
+.trending-num{
+  font-family:var(--ff-serif);font-size:32px;font-weight:700;
+  color:rgba(191,160,90,.18);line-height:1;flex-shrink:0;
+  transition:color var(--t);min-width:36px;padding-top:4px;
+}
+.trending-item:hover .trending-num{color:var(--gold)}
+.trending-info{}
+.trending-cat{
+  font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;display:block;
+}
+.trending-title{
+  font-family:var(--ff-serif);font-size:15px;font-weight:700;
+  line-height:1.3;color:var(--ink);letter-spacing:-.01em;margin-bottom:6px;
+  transition:color var(--t);
+}
+.trending-item:hover .trending-title{color:var(--gold-lt)}
+.trending-meta{font-size:11px;color:var(--ink-3)}
+
+/* Sticky newsletter aside */
+.sidebar-nl{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);
+  padding:28px;margin-top:24px;position:sticky;top:140px;
+}
+.sidebar-nl-title{
+  font-family:var(--ff-serif);font-size:22px;font-weight:700;
+  color:var(--ink);margin-bottom:8px;letter-spacing:-.02em;line-height:1.2;
+}
+.sidebar-nl-title em{color:var(--gold);font-style:italic}
+.sidebar-nl-desc{font-size:13px;line-height:1.7;color:var(--ink-2);margin-bottom:16px}
+.sidebar-nl-input{
+  width:100%;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);
+  padding:12px 14px;font-size:13px;color:var(--ink);outline:none;
+  transition:border-color var(--t);margin-bottom:10px;font-family:var(--ff-sans);
+}
+.sidebar-nl-input::placeholder{color:var(--ink-3)}
+.sidebar-nl-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim)}
+.sidebar-nl-btn{
+  width:100%;padding:12px;background:var(--gold);color:#07070A;
+  border:none;border-radius:var(--r);font-size:13px;font-weight:700;
+  cursor:none;transition:all var(--t);letter-spacing:.04em;font-family:var(--ff-sans);
+}
+.sidebar-nl-btn:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.sidebar-nl-note{font-size:11px;color:var(--ink-3);text-align:center;margin-top:8px}
+
+/* Load more */
+.load-more-row{display:flex;justify-content:center;padding-top:16px}
+
+/* ── RESPONSIVE: articles page ── */
+@media(max-width:1100px){
+  .articles-layout{grid-template-columns:1fr}
+  .trending-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .sidebar-nl{position:static;margin-top:0}
+  .cat-tiles-row{grid-template-columns:repeat(3,1fr)}
+  .fa-inner{grid-template-columns:1fr}
+  .fa-img-wrap img{height:320px}
+  .page-hero-inner{grid-template-columns:1fr;gap:0}
+  .page-hero-right{display:none}
+}
+@media(max-width:900px){
+  .art-grid-3{grid-template-columns:repeat(2,1fr)}
+  .cat-tiles-row{grid-template-columns:repeat(3,1fr)}
+  .trending-sidebar{grid-template-columns:1fr}
+  .search-bar-inner{flex-direction:column;align-items:stretch}
+  .filter-pills{overflow-x:auto}
+}
+@media(max-width:640px){
+  .art-grid-3{grid-template-columns:1fr}
+  .cat-tiles-row{grid-template-columns:repeat(2,1fr)}
+  .articles-main-inner{padding:56px 20px}
+  .fa-inner{padding:56px 20px}
+  .page-hero{padding:130px 0 56px}
+  .page-hero-inner{padding:0 20px}
+  .search-bar-inner{padding:0 20px}
+  .cat-strip-inner{padding:0 20px}
+}
+</style>
+<title>Articles — Money and Meaning</title>
 </head>
 <body>
 
-<div id="readProgress"></div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
 
-<div id="loader">
-  <div class="loader-logo">M&amp;M</div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-ring" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="163" stroke-dashoffset="163" class="loader-arc"/></svg>
+    <span class="loader-wordmark">M&amp;M</span>
+  </div>
 </div>
 
-<header class="navbar" id="navbar">
-  <div class="nav-inner">
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <div class="logo-badge">M&amp;M</div>
-      <span class="logo-name">Money <span>&amp;</span> Meaning</span>
+      <span class="nav-logo-mark">◆</span>
+      <span class="nav-logo-text">Money <em>&amp;</em> Meaning</span>
     </a>
-    <nav class="nav-links">
-      <a href="index.html"    class="nav-link">Home</a>
-      <a href="articles.html" class="nav-link active">Articles</a>
-      <a href="about.html"    class="nav-link">About</a>
-      <a href="contact.html"  class="nav-link">Contact</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#featured" class="nav-link">Insights</a>
+      <a href="index.html#categories" class="nav-link">Topics</a>
+      <a href="articles.html" class="nav-link" style="color:var(--ink)">Articles</a>
+      <a href="#newsletter" class="nav-link">Newsletter</a>
     </nav>
-    <div class="nav-right">
-      <a href="index.html#newsletter" class="btn btn-gold" style="padding:10px 20px;font-size:12px">Subscribe</a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
+    <div class="nav-end">
+      <a href="#newsletter" class="nav-cta">Subscribe Free</a>
+      <button class="nav-burger" id="burger" aria-label="menu">
+        <span></span><span></span>
       </button>
     </div>
   </div>
+  <div class="nav-drawer" id="drawer">
+    <a href="index.html">Home</a>
+    <a href="index.html#featured">Insights</a>
+    <a href="index.html#categories">Topics</a>
+    <a href="articles.html">Articles</a>
+    <a href="contact.html">Contact</a>
+    <a href="#newsletter" class="drawer-cta">Subscribe — It's Free</a>
+  </div>
 </header>
 
-<nav class="mobile-nav" id="mobileNav">
-  <a href="index.html">Home</a>
-  <a href="articles.html">Articles</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="index.html#newsletter" class="mobile-cta">Subscribe Free</a>
-</nav>
-
-<!-- PAGE HERO -->
+<!-- ═══════ PAGE HERO ═══════ -->
 <section class="page-hero">
   <div class="page-hero-inner">
-    <span class="label">The Archive</span>
-    <h1 class="page-hero-title">All Articles</h1>
-    <p class="page-hero-sub">300+ essays on finance, investing, economics, and the philosophy of a life well-lived financially. Read deeply. Think clearly.</p>
+    <div>
+      <div class="page-hero-kicker" data-reveal>The Archive</div>
+      <h1 class="page-hero-title" data-reveal data-delay="1">
+        All<br><em>Articles</em>
+      </h1>
+      <p class="page-hero-sub" data-reveal data-delay="2">
+        Every piece we publish on economics, markets, business, investing, and the ideas shaping how the modern world actually works. Independent. Clear. Always free.
+      </p>
+    </div>
+    <div class="page-hero-right" data-reveal data-delay="3">
+      <div class="page-hero-count">200+</div>
+      <div class="page-hero-count-label">Articles Published</div>
+    </div>
   </div>
 </section>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <div class="filter-inner">
-    <button class="filter-btn active" data-filter="all">All Topics</button>
-    <button class="filter-btn" data-filter="investing">Investing</button>
-    <button class="filter-btn" data-filter="economics">Economics</button>
-    <button class="filter-btn" data-filter="business">Business</button>
-    <button class="filter-btn" data-filter="psychology">Psychology</button>
-    <button class="filter-btn" data-filter="big-ideas">Big Ideas</button>
-    <button class="filter-btn" data-filter="careers">Careers</button>
+<!-- ═══════ SEARCH + FILTERS ═══════ -->
+<div class="search-bar-wrap">
+  <div class="search-bar-inner">
+    <div class="search-input-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="search" class="search-input" placeholder="Search articles — try 'inflation', 'India economy', 'markets'…" id="searchInput"/>
+    </div>
+    <div class="filter-pills" id="filterPills">
+      <button class="filter-pill active" data-filter="all">All Topics</button>
+      <button class="filter-pill" data-filter="economics">Economics</button>
+      <button class="filter-pill" data-filter="markets">Markets</button>
+      <button class="filter-pill" data-filter="business">Business</button>
+      <button class="filter-pill" data-filter="investing">Investing</button>
+      <button class="filter-pill" data-filter="psychology">Psychology</button>
+      <button class="filter-pill" data-filter="technology">Technology</button>
+      <button class="filter-pill" data-filter="big-ideas">Big Ideas</button>
+    </div>
   </div>
 </div>
 
-<!-- ARTICLES GRID -->
-<section class="sec" style="background:var(--bg)">
-  <div class="wrap">
-    <div class="blog-grid">
-
-      <article class="blog-card reveal" data-cat="investing">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80" alt="Compounding wealth" loading="lazy"/>
-          <span class="blog-card-img-tag">Investing</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The Compounding Effect Nobody Talks About: Time, Patience, and the Wealth Gap</h3>
-          <p class="blog-card-exc">Beyond returns — how the wealthy really use compounding, and what decades of behavioral research can teach the rest of us.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">J</div><span>James Okafor</span></div>
-            <div class="bc-meta"><span>Nov 14, 2024</span><span class="bc-dot">·</span><span>9 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d1" data-cat="economics">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=700&q=80" alt="Global finance" loading="lazy"/>
-          <span class="blog-card-img-tag">Economics</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The Quiet Restructuring of Global Finance: What Central Banks Won't Tell You</h3>
-          <p class="blog-card-exc">Reserve currency shifts, digital assets, and the institutional moves reshaping the architecture of global wealth.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">S</div><span>Serena Malik</span></div>
-            <div class="bc-meta"><span>Nov 12, 2024</span><span class="bc-dot">·</span><span>14 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d2" data-cat="psychology">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1551836022-8b2858c9c69b?w=700&q=80" alt="Behavioral finance" loading="lazy"/>
-          <span class="blog-card-img-tag">Psychology</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">Why Smart Investors Make Terrible Decisions: Lessons from Behavioral Finance</h3>
-          <p class="blog-card-exc">The cognitive biases that consistently sabotage even highly intelligent investors — and the frameworks that actually help.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">D</div><span>David Nwosu</span></div>
-            <div class="bc-meta"><span>Nov 8, 2024</span><span class="bc-dot">·</span><span>8 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal" data-cat="investing">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=700&q=80" alt="Index funds passive" loading="lazy"/>
-          <span class="blog-card-img-tag">Investing</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The Index Fund Revolution Is Over. What Comes Next for Passive Investors?</h3>
-          <p class="blog-card-exc">Factor investing, direct indexing, and the new tools reshaping what passive strategy actually means in the 2020s.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">J</div><span>James Okafor</span></div>
-            <div class="bc-meta"><span>Oct 28, 2024</span><span class="bc-dot">·</span><span>10 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d1" data-cat="economics">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=700&q=80" alt="Recession indicators" loading="lazy"/>
-          <span class="blog-card-img-tag">Economics</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">Recession Signals: How to Read the Economy Without Being Fooled by the News</h3>
-          <p class="blog-card-exc">Yield curves, leading indicators, and the economic metrics that actually predict downturns — a practical guide for informed citizens.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">S</div><span>Serena Malik</span></div>
-            <div class="bc-meta"><span>Oct 22, 2024</span><span class="bc-dot">·</span><span>12 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d2" data-cat="business">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=80" alt="Founders VC" loading="lazy"/>
-          <span class="blog-card-img-tag">Business</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">Why the Smartest Founders Are Saying No to Venture Capital in 2024</h3>
-          <p class="blog-card-exc">Growth-at-all-costs is over. A new generation of entrepreneurs is choosing profitability, ownership, and slower but more durable growth.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">A</div><span>Amara Osei</span></div>
-            <div class="bc-meta"><span>Oct 15, 2024</span><span class="bc-dot">·</span><span>8 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal" data-cat="big-ideas">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=700&q=80" alt="Financial independence" loading="lazy"/>
-          <span class="blog-card-img-tag">Big Ideas</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The Number You Actually Need: Rethinking Financial Independence Beyond the 4% Rule</h3>
-          <p class="blog-card-exc">Financial independence isn't a single number — it's a moving target shaped by lifestyle, values, and what you want your time to look like at 55.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">D</div><span>David Nwosu</span></div>
-            <div class="bc-meta"><span>Oct 9, 2024</span><span class="bc-dot">·</span><span>15 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d1" data-cat="investing">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80" alt="ESG investing" loading="lazy"/>
-          <span class="blog-card-img-tag">Investing</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">ESG Is Broken. Here's What Responsible Investing Actually Looks Like</h3>
-          <p class="blog-card-exc">The ESG label has been diluted beyond recognition. But aligning capital with values is more important than ever. Where do we go from here?</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">R</div><span>Riya Sharma</span></div>
-            <div class="bc-meta"><span>Oct 3, 2024</span><span class="bc-dot">·</span><span>11 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d2" data-cat="psychology">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Enough philosophy" loading="lazy"/>
-          <span class="blog-card-img-tag">Psychology</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">Enough: The Philosophy of Knowing When to Stop Accumulating</h3>
-          <p class="blog-card-exc">In a culture that always wants more, the radical act may be deciding what "enough" looks like — and then actually stopping. A meditation on wealth and satisfaction.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">J</div><span>James Okafor</span></div>
-            <div class="bc-meta"><span>Sep 27, 2024</span><span class="bc-dot">·</span><span>7 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal" data-cat="careers">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=700&q=80" alt="Career capital" loading="lazy"/>
-          <span class="blog-card-img-tag">Careers</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The Negotiation Nobody Teaches You: How to Raise Your Salary Without Losing the Room</h3>
-          <p class="blog-card-exc">Research-backed frameworks for the single most high-leverage financial act most people never make — asking for what you're actually worth.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">R</div><span>Riya Sharma</span></div>
-            <div class="bc-meta"><span>Sep 18, 2024</span><span class="bc-dot">·</span><span>9 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d1" data-cat="economics">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=700&q=80" alt="Global wealth geography" loading="lazy"/>
-          <span class="blog-card-img-tag">Economics</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The New Geography of Wealth: Where the Next Generation of Capital Is Being Built</h3>
-          <p class="blog-card-exc">Southeast Asia, West Africa, and the Gulf states are emerging as new centers of capital formation. Here's what that means for global investment strategy.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">A</div><span>Amara Osei</span></div>
-            <div class="bc-meta"><span>Sep 10, 2024</span><span class="bc-dot">·</span><span>11 min</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="blog-card reveal reveal-d2" data-cat="business">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700&q=80" alt="Business strategy" loading="lazy"/>
-          <span class="blog-card-img-tag">Business</span>
-        </div>
-        <div class="blog-card-body">
-          <h3 class="blog-card-title">The Strategy Most CEOs Get Wrong: Why Vision Without Execution Is Just a Dream</h3>
-          <p class="blog-card-exc">Examining the gap between strategic intent and operational reality — and the systems that close it in organizations that consistently outperform.</p>
-          <div class="blog-card-foot">
-            <div class="bc-author"><div class="bc-ava">A</div><span>Amara Osei</span></div>
-            <div class="bc-meta"><span>Aug 30, 2024</span><span class="bc-dot">·</span><span>13 min</span></div>
-          </div>
-        </div>
-      </article>
-
+<!-- ═══════ FEATURED ARTICLE ═══════ -->
+<section class="featured-article">
+  <div class="fa-inner">
+    <div class="fa-img-wrap" data-reveal>
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&q=80&auto=format" alt="India economic future" loading="eager"/>
+      <div class="fa-img-overlay"></div>
+      <span class="fa-img-badge">Cover Story</span>
     </div>
-
-    <!-- PAGINATION -->
-    <div class="pagination reveal">
-      <button class="pg-btn active">1</button>
-      <button class="pg-btn">2</button>
-      <button class="pg-btn">3</button>
-      <span class="pg-ellipsis">…</span>
-      <button class="pg-btn">14</button>
-      <button class="pg-btn" style="padding:0 20px">Next →</button>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER (inline, light version) -->
-<section class="newsletter sec" id="newsletter" style="background:var(--bg-1)">
-  <div class="nl-inner">
-    <div class="nl-left reveal">
-      <span class="label">Never Miss an Issue</span>
-      <h2 class="nl-title">The Weekly <em>Brief</em></h2>
-      <p class="nl-desc">One essay every Sunday. 52,000 readers and counting. No noise, no agenda — just rigorous thinking on the things that matter most financially.</p>
-      <ul class="nl-perks">
-        <li class="nl-perk">Curated insights, not content marketing</li>
-        <li class="nl-perk">Deep dives, not hot takes</li>
-        <li class="nl-perk">Free. Always.</li>
-      </ul>
-    </div>
-    <div class="nl-form-box reveal reveal-d2">
-      <form class="nl-form" id="nlForm">
-        <div class="nl-field">
-          <label for="nlName">First Name</label>
-          <input type="text" id="nlName" name="name" placeholder="Your first name" required/>
+    <div class="fa-content" data-reveal data-delay="2">
+      <span class="fa-cat">Economics</span>
+      <h2 class="fa-title">India's Economic Future Explained: Why the World's Most Watched Economy Will Reshape Global Markets</h2>
+      <p class="fa-excerpt">India is no longer simply an emerging market story. With 1.4 billion people, a rapidly digitising economy, and a young workforce entering its most productive decades, India's trajectory could define the shape of global growth through 2040. We break down the forces driving its rise, the structural risks that remain, and what every informed reader needs to understand now.</p>
+      <div class="fa-meta">
+        <div class="fa-meta-left">
+          <div class="fa-avatar">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80&auto=format" alt="Editor"/>
+          </div>
+          <div>
+            <span class="fa-author-name">Money &amp; Meaning</span>
+            <span class="fa-date">May 2026 · 14 min read</span>
+          </div>
         </div>
-        <div class="nl-field">
-          <label for="nlEmail">Email Address</label>
-          <input type="email" id="nlEmail" name="email" placeholder="your@email.com" required/>
-        </div>
-        <button type="submit" class="nl-submit"><span>Subscribe for Free</span><span>→</span></button>
-        <p class="nl-note">No spam. Unsubscribe anytime.</p>
-      </form>
-      <div class="nl-success" id="nlSuccess">
-        <div class="nl-success-icon">✓</div>
-        <h3>You're in.</h3>
-        <p>First issue arrives this Sunday morning.</p>
+        <a href="#" class="fa-read-btn">
+          Read Article
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ═══════ CATEGORY STRIP ═══════ -->
+<div class="cat-strip">
+  <div class="cat-strip-inner">
+    <div class="cat-strip-head" data-reveal>
+      <span class="eyebrow">Browse by Topic</span>
+    </div>
+    <div class="cat-tiles-row">
+      <a href="#" class="cat-tile-sm" data-reveal>
+        <span class="cat-tile-sm-icon">🌍</span>
+        <span class="cat-tile-sm-name">Economics</span>
+        <span class="cat-tile-sm-count">38 articles</span>
+      </a>
+      <a href="#" class="cat-tile-sm" data-reveal data-delay="1">
+        <span class="cat-tile-sm-icon">📊</span>
+        <span class="cat-tile-sm-name">Markets</span>
+        <span class="cat-tile-sm-count">42 articles</span>
+      </a>
+      <a href="#" class="cat-tile-sm" data-reveal data-delay="2">
+        <span class="cat-tile-sm-icon">💼</span>
+        <span class="cat-tile-sm-name">Business</span>
+        <span class="cat-tile-sm-count">31 articles</span>
+      </a>
+      <a href="#" class="cat-tile-sm" data-reveal data-delay="3">
+        <span class="cat-tile-sm-icon">📈</span>
+        <span class="cat-tile-sm-name">Investing</span>
+        <span class="cat-tile-sm-count">29 articles</span>
+      </a>
+      <a href="#" class="cat-tile-sm" data-reveal data-delay="4">
+        <span class="cat-tile-sm-icon">🧠</span>
+        <span class="cat-tile-sm-name">Psychology</span>
+        <span class="cat-tile-sm-count">27 articles</span>
+      </a>
+      <a href="#" class="cat-tile-sm" data-reveal data-delay="5">
+        <span class="cat-tile-sm-icon">💡</span>
+        <span class="cat-tile-sm-name">Big Ideas</span>
+        <span class="cat-tile-sm-count">24 articles</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ ARTICLES GRID + SIDEBAR ═══════ -->
+<section class="articles-main">
+  <div class="articles-main-inner">
+
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Latest Articles</span>
+        <h2 class="section-title">Recent <em>Reads</em></h2>
+      </div>
+    </div>
+
+    <div class="articles-layout">
+
+      <!-- Left: article grid -->
+      <div>
+        <div class="art-grid-3" id="articleGrid">
+
+          <article class="art-card" data-reveal data-cat="economics">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80&auto=format" alt="Inflation and everyday life" loading="lazy"/>
+                <span class="art-tag">Economics</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">Why Inflation Changes Everyday Life More Than Any Government Policy</h3>
+                <p class="art-exc">Inflation isn't just a number on a chart — it quietly reshapes what you earn, spend, and save every single day. Here's what the official data obscures and what you actually need to understand.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">May 2026 · 8 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-delay="1" data-cat="markets">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80&auto=format" alt="Global markets explained" loading="lazy"/>
+                <span class="art-tag">Markets</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">Understanding Global Markets Simply: What Moves Prices and Why It Matters to You</h3>
+                <p class="art-exc">Markets are not random. They follow patterns driven by information, sentiment, and policy. Once you understand the basic mechanics, the financial world becomes far less mysterious.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">May 2026 · 11 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-delay="2" data-cat="psychology">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&auto=format" alt="Psychology of wealth creation" loading="lazy"/>
+                <span class="art-tag">Psychology</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">The Psychology Behind Wealth Creation: Why Your Mindset Matters More Than Your Salary</h3>
+                <p class="art-exc">Income is a poor predictor of long-term financial outcomes. Research consistently shows that beliefs, habits, and patience determine who builds lasting wealth far more than earnings do.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Apr 2026 · 10 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-cat="technology">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80&auto=format" alt="Future of business and technology" loading="lazy"/>
+                <span class="art-tag">Technology</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">The Future of Business and Technology: What Every Industry Looks Like in 2035</h3>
+                <p class="art-exc">AI, energy transition, and demographic shifts are already restructuring how industries operate. We map the ten-year transformation across the sectors that matter most to your financial future.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Apr 2026 · 13 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-delay="1" data-cat="investing">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format" alt="How central banks work" loading="lazy"/>
+                <span class="art-tag">Investing</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">How Central Banks Actually Work — and Why Their Decisions Shape Your Financial Life</h3>
+                <p class="art-exc">Interest rates, money supply, quantitative easing — these aren't abstract concepts. They determine your mortgage rate, your savings returns, and the value of your investments. Here's how it all connects.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Mar 2026 · 12 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-delay="2" data-cat="business">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format" alt="Business strategy" loading="lazy"/>
+                <span class="art-tag">Business</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">Why Most Business Strategies Fail — and the One Mental Model That Changes Everything</h3>
+                <p class="art-exc">Most companies confuse motion with progress. The organisations that consistently outperform share one thing: clarity about what they will not do. A deep look at strategic discipline.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Mar 2026 · 9 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-cat="economics">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80&auto=format" alt="Recession signals" loading="lazy"/>
+                <span class="art-tag">Economics</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">Recession Signals: How to Read the Economy Without Being Misled by the News</h3>
+                <p class="art-exc">Yield curves, leading indicators, and the economic metrics that actually matter — a practical guide for anyone who wants to understand what's coming before the headlines catch up.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Feb 2026 · 11 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-delay="1" data-cat="markets">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80&auto=format" alt="Currency wars" loading="lazy"/>
+                <span class="art-tag">Markets</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">Currency Wars Explained: How Exchange Rates Affect Everything from Groceries to Global Trade</h3>
+                <p class="art-exc">When currencies weaken or strengthen, the effects ripple across every corner of the economy. Understanding the basics of exchange rates is no longer optional for the financially literate.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Feb 2026 · 10 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="art-card" data-reveal data-delay="2" data-cat="big-ideas">
+            <a href="#" class="art-card-link">
+              <div class="art-img-wrap">
+                <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=600&q=80&auto=format" alt="Money and meaning" loading="lazy"/>
+                <span class="art-tag">Big Ideas</span>
+              </div>
+              <div class="art-body">
+                <h3 class="art-title">What Does Money Actually Mean? Wealth, Freedom, and the Life Well Lived</h3>
+                <p class="art-exc">Beyond portfolios and growth metrics lies a deeper question: what is money actually for? Philosophy, behavioural research, and real data combined reveal a clearer, more honest answer than most financial writing offers.</p>
+                <div class="art-foot">
+                  <div class="art-author"><div class="art-ava">M</div><span>Money &amp; Meaning</span></div>
+                  <div class="art-date">Jan 2026 · 9 min</div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+        </div><!-- /.art-grid-3 -->
+
+        <div class="load-more-row" data-reveal>
+          <button class="btn-ghost" id="loadMoreBtn" style="gap:12px">
+            Load More Articles
+            <svg viewBox="0 0 20 20" fill="none" style="width:16px;height:16px"><path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div><!-- /left -->
+
+      <!-- Right: Trending + sidebar newsletter -->
+      <aside class="trending-sidebar">
+
+        <div data-reveal>
+          <div class="trending-label">Trending Now</div>
+          <div class="trending-list">
+
+            <div class="trending-item">
+              <div class="trending-num">01</div>
+              <div class="trending-info">
+                <span class="trending-cat">Economics</span>
+                <div class="trending-title">Why Inflation Changes Everyday Life More Than Any Government Policy</div>
+                <div class="trending-meta">May 2026 · 8 min read</div>
+              </div>
+            </div>
+
+            <div class="trending-item">
+              <div class="trending-num">02</div>
+              <div class="trending-info">
+                <span class="trending-cat">Markets</span>
+                <div class="trending-title">Understanding Global Markets Simply: What Moves Prices</div>
+                <div class="trending-meta">May 2026 · 11 min read</div>
+              </div>
+            </div>
+
+            <div class="trending-item">
+              <div class="trending-num">03</div>
+              <div class="trending-info">
+                <span class="trending-cat">Economics</span>
+                <div class="trending-title">India's Economic Future: Why the World's Most Watched Economy Matters</div>
+                <div class="trending-meta">May 2026 · 14 min read</div>
+              </div>
+            </div>
+
+            <div class="trending-item">
+              <div class="trending-num">04</div>
+              <div class="trending-info">
+                <span class="trending-cat">Psychology</span>
+                <div class="trending-title">The Psychology Behind Wealth Creation: Mindset Over Salary</div>
+                <div class="trending-meta">Apr 2026 · 10 min read</div>
+              </div>
+            </div>
+
+            <div class="trending-item">
+              <div class="trending-num">05</div>
+              <div class="trending-info">
+                <span class="trending-cat">Technology</span>
+                <div class="trending-title">The Future of Business and Technology: What 2035 Looks Like</div>
+                <div class="trending-meta">Apr 2026 · 13 min read</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sticky newsletter -->
+        <div class="sidebar-nl" data-reveal data-delay="2">
+          <div class="sidebar-nl-title">Free Weekly<br><em>Newsletter</em></div>
+          <p class="sidebar-nl-desc">One article per week on economics, markets, and ideas. Joined by 50,000+ readers.</p>
+          <input type="email" class="sidebar-nl-input" placeholder="your@email.com" id="sidebarNlEmail"/>
+          <button class="sidebar-nl-btn" id="sidebarNlBtn">Subscribe Free →</button>
+          <p class="sidebar-nl-note">No spam. Unsubscribe anytime.</p>
+        </div>
+
+      </aside>
+    </div><!-- /.articles-layout -->
+
+  </div>
+</section>
+
+<!-- ═══════ NEWSLETTER ═══════ -->
+<section class="section newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="nl-wrap">
+      <div class="nl-left" data-reveal>
+        <span class="eyebrow">Free Weekly Newsletter</span>
+        <h2 class="nl-title">One Read.<br>Every Week.<br><em>Always Free.</em></h2>
+        <p class="nl-desc">Join over 50,000 readers who get one clear, independent article on economics, markets, business, or ideas every week — written to help you understand the world and make better decisions within it.</p>
+        <ul class="nl-perks">
+          <li><span class="perk-icon">◆</span> One article per week — focused and deep</li>
+          <li><span class="perk-icon">◆</span> No sponsored content, no noise</li>
+          <li><span class="perk-icon">◆</span> Economics, markets, business, ideas</li>
+          <li><span class="perk-icon">◆</span> Free forever — unsubscribe anytime</li>
+        </ul>
+      </div>
+      <div class="nl-right" data-reveal data-delay="2">
+        <form class="nl-form" id="nlForm">
+          <div class="nl-form-header">
+            <h3>Start Reading Today</h3>
+            <p>Your first article arrives this week.</p>
+          </div>
+          <div class="nl-fields">
+            <div class="nl-field">
+              <label for="nlName">Your Name</label>
+              <input type="text" id="nlName" name="name" placeholder="First name" autocomplete="given-name" required/>
+            </div>
+            <div class="nl-field">
+              <label for="nlEmail">Email Address</label>
+              <input type="email" id="nlEmail" name="email" placeholder="you@example.com" autocomplete="email" required/>
+            </div>
+          </div>
+          <button type="submit" class="nl-btn">
+            <span class="nl-btn-text">Subscribe — It's Free</span>
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="nl-privacy">No spam. One article per week. Unsubscribe in one click.</p>
+        </form>
+        <div class="nl-success" id="nlSuccess">
+          <div class="nl-success-check">✓</div>
+          <h3>Welcome aboard.</h3>
+          <p>You're now part of the Money &amp; Meaning community. Your first article is on its way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
+  <div class="footer-top">
+    <div class="container footer-top-inner">
       <div class="footer-brand">
-        <a href="index.html" class="f-logo">Money <span>&amp;</span> Meaning</a>
-        <p class="f-desc">Intelligent writing on finance, investing, economics, and the ideas that shape a purposeful life.</p>
-        <div class="f-social">
-          <a href="#" class="soc-btn">𝕏</a>
-          <a href="#" class="soc-btn">in</a>
-          <a href="#" class="soc-btn">S</a>
-          <a href="#" class="soc-btn">▶</a>
+        <a href="index.html" class="footer-logo">
+          <span class="footer-logo-mark">◆</span>
+          Money <em>&amp;</em> Meaning
+        </a>
+        <p class="footer-tagline">Economics, Markets, Business, and Ideas shaping the modern world — written independently, clearly, and without agenda.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter/X" class="social-btn">𝕏</a>
+          <a href="#" aria-label="LinkedIn" class="social-btn">in</a>
+          <a href="#" aria-label="Instagram" class="social-btn">◉</a>
+          <a href="#" aria-label="YouTube" class="social-btn">▶</a>
         </div>
       </div>
-      <div>
-        <div class="f-col-title">Topics</div>
-        <ul class="f-links">
-          <li><a href="articles.html">Investing</a></li>
-          <li><a href="articles.html">Economics</a></li>
-          <li><a href="articles.html">Business</a></li>
-          <li><a href="articles.html">Psychology</a></li>
-          <li><a href="articles.html">Big Ideas</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="f-col-title">Site</div>
-        <ul class="f-links">
-          <li><a href="about.html">About</a></li>
-          <li><a href="articles.html">Articles</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="#">Privacy</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="f-col-title">Newsletter</div>
-        <p class="f-nl-desc">The Weekly Brief — one essay every Sunday.</p>
-        <div class="f-nl-row">
-          <input type="email" class="f-nl-input" placeholder="Your email"/>
-          <button type="button" class="f-nl-btn">→</button>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="#">Economics</a></li>
+            <li><a href="#">Markets</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Psychology</a></li>
+            <li><a href="#">Big Ideas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="articles.html">All Articles</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-nl">
+          <h4>Free Weekly Newsletter</h4>
+          <p>One article per week on economics, markets, business, and ideas. Always free.</p>
+          <div class="footer-nl">
+            <input type="email" placeholder="your@email.com" aria-label="Email for newsletter"/>
+            <button type="button" aria-label="Subscribe">→</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="f-copy">© 2024 Money and Meaning. All rights reserved.</p>
-      <div class="f-legal">
-        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Money and Meaning. All rights reserved.</p>
+      <p class="footer-disc">Editorial content only. Not financial advice.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclaimer</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script src="script.js"></script>
+<script>
+/* ── ARTICLES PAGE JS ── */
+
+/* Filter pills */
+(function(){
+  const pills   = document.querySelectorAll('.filter-pill');
+  const cards   = document.querySelectorAll('#articleGrid .art-card');
+  const input   = document.getElementById('searchInput');
+  let active    = 'all';
+
+  function applyFilter(){
+    cards.forEach(card=>{
+      const cat   = (card.dataset.cat||'').toLowerCase();
+      const title = card.querySelector('.art-title').textContent.toLowerCase();
+      const exc   = (card.querySelector('.art-exc')||{textContent:''}).textContent.toLowerCase();
+      const query = input ? input.value.toLowerCase() : '';
+      const catOk = active==='all' || cat===active;
+      const qOk   = !query || title.includes(query) || exc.includes(query);
+      card.style.opacity    = (catOk && qOk) ? '1' : '0.2';
+      card.style.pointerEvents = (catOk && qOk) ? '' : 'none';
+      card.style.transition = 'opacity .3s';
+    });
+  }
+
+  pills.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      pills.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      active = btn.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  if(input){
+    input.addEventListener('input', applyFilter);
+  }
+})();
+
+/* Load more (cosmetic) */
+(function(){
+  const btn = document.getElementById('loadMoreBtn');
+  if(!btn) return;
+  btn.addEventListener('click',()=>{
+    btn.textContent='Loading…';btn.disabled=true;
+    setTimeout(()=>{btn.textContent='All articles loaded';},1200);
+  });
+})();
+
+/* Sidebar newsletter */
+(function(){
+  const btn = document.getElementById('sidebarNlBtn');
+  const inp = document.getElementById('sidebarNlEmail');
+  if(!btn||!inp) return;
+  btn.addEventListener('click',()=>{
+    if(!inp.value.trim()){inp.focus();return;}
+    btn.textContent='✓ Subscribed!';btn.style.background='#2d6a4f';
+    inp.disabled=true;inp.value='';
+    inp.placeholder='You\'re subscribed!';btn.disabled=true;
+  });
+})();
+
+/* Footer mini forms */
+(function(){
+  document.querySelectorAll('.footer-nl button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const inp=btn.previousElementSibling;
+      if(!inp||!inp.value.trim()){if(inp)inp.focus();return;}
+      btn.textContent='✓';btn.style.background='#2d6a4f';
+      inp.disabled=true;inp.value='';inp.placeholder='Subscribed!';btn.disabled=true;
+    });
+  });
+})();
+</script>
 </body>
 </html>

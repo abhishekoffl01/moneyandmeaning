@@ -1,288 +1,619 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Contact Money and Meaning — pitch a story, share feedback, or explore a collaboration."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <title>Contact — Money and Meaning</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Contact Money and Meaning — get in touch for collaborations, pitches, feedback, or general enquiries about our editorial finance publication."/>
+<meta property="og:title" content="Contact — Money and Meaning"/>
+<meta property="og:description" content="Reach out to Money and Meaning — editorial collaborations, feedback, and general enquiries."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── CONTACT PAGE ONLY ── */
+
+/* Page hero */
+.page-hero{
+  padding:160px 0 100px;
+  background:var(--bg-1);
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 80% at 80% 30%,rgba(191,160,90,.07) 0%,transparent 65%),
+             radial-gradient(ellipse 40% 60% at 10% 80%,rgba(191,160,90,.05) 0%,transparent 60%);
+}
+/* Decorative large text */
+.page-hero::after{
+  content:'◆';position:absolute;right:5%;top:50%;transform:translateY(-50%);
+  font-family:var(--ff-serif);font-size:340px;line-height:1;
+  color:rgba(191,160,90,.025);pointer-events:none;
+}
+.page-hero-inner{
+  position:relative;z-index:1;
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+}
+.page-hero-kicker{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:20px;
+}
+.page-hero-kicker::before{content:'';width:20px;height:1px;background:var(--gold)}
+.page-hero-title{
+  font-family:var(--ff-serif);
+  font-size:clamp(52px,7vw,90px);
+  font-weight:900;line-height:.95;letter-spacing:-.04em;color:var(--ink);
+  margin-bottom:24px;
+}
+.page-hero-title em{color:var(--gold);font-style:italic}
+.page-hero-sub{
+  font-size:clamp(15px,1.6vw,18px);line-height:1.85;color:var(--ink-2);max-width:520px;
+}
+
+/* Contact grid layout */
+.contact-section{background:var(--bg);padding:100px 0}
+.contact-grid{
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:start;
+}
+
+/* Left column */
+.contact-left{display:flex;flex-direction:column;gap:48px}
+
+.contact-intro h2{
+  font-family:var(--ff-serif);font-size:clamp(26px,3vw,38px);
+  font-weight:700;line-height:1.12;letter-spacing:-.03em;color:var(--ink);margin-bottom:14px;
+}
+.contact-intro h2 em{color:var(--gold);font-style:italic}
+.contact-intro p{font-size:15px;line-height:1.85;color:var(--ink-2)}
+
+/* Contact cards (email / social / response) */
+.contact-cards{display:flex;flex-direction:column;gap:12px}
+.contact-card{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:22px 24px;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);
+  transition:border-color var(--t) var(--ease), background var(--t);
+}
+.contact-card:hover{border-color:var(--border-h);background:var(--bg-card-h)}
+.cc-icon{
+  width:42px;height:42px;border-radius:var(--r);flex-shrink:0;
+  background:var(--gold-dim);border:1px solid var(--gold-line);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.cc-body{}
+.cc-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.cc-value{font-family:var(--ff-serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.cc-sub{font-size:12px;color:var(--ink-3);line-height:1.5}
+
+/* Social media grid */
+.social-section{}
+.social-label{
+  font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:16px;display:flex;align-items:center;gap:10px;
+}
+.social-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.social-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.social-card{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);
+  transition:all var(--t) var(--ease);cursor:none;
+}
+.social-card:hover{border-color:var(--border-h);background:var(--bg-card-h);transform:translateX(3px)}
+.sc-icon{
+  width:34px;height:34px;border-radius:var(--r);
+  background:var(--gold-dim);border:1px solid var(--gold-line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:var(--gold);flex-shrink:0;
+}
+.sc-info{}
+.sc-name{font-size:13px;font-weight:600;color:var(--ink);display:block;line-height:1.2}
+.sc-handle{font-size:11px;color:var(--ink-3)}
+
+/* Right: glassmorphism contact form */
+.contact-form-wrap{
+  background:var(--bg-1);
+  border:1px solid var(--border);border-radius:var(--r2);
+  padding:48px;position:relative;overflow:hidden;
+}
+.contact-form-wrap::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(191,160,90,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cf-header{margin-bottom:32px}
+.cf-header h3{
+  font-family:var(--ff-serif);font-size:28px;font-weight:700;
+  color:var(--ink);letter-spacing:-.02em;margin-bottom:6px;
+}
+.cf-header p{font-size:14px;color:var(--ink-2);line-height:1.65}
+
+.cf-form{display:flex;flex-direction:column;gap:20px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf-field{display:flex;flex-direction:column;gap:7px}
+.cf-field label{
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
+}
+.cf-field input,.cf-field select,.cf-field textarea{
+  background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);
+  padding:13px 16px;font-size:14px;color:var(--ink);outline:none;
+  transition:border-color var(--t) var(--ease), box-shadow var(--t);
+  font-family:var(--ff-sans);width:100%;
+}
+.cf-field input::placeholder,.cf-field textarea::placeholder{color:var(--ink-3)}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim);
+}
+.cf-field select{
+  appearance:none;cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2355504A' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+.cf-field select option{background:var(--bg-2);color:var(--ink)}
+.cf-field textarea{resize:vertical;min-height:130px;line-height:1.65}
+
+.cf-char-count{font-size:11px;color:var(--ink-3);text-align:right;margin-top:2px}
+
+.cf-submit{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:15px 24px;background:var(--gold);color:#07070A;
+  border:none;border-radius:var(--r);font-size:14px;font-weight:700;
+  letter-spacing:.04em;cursor:none;transition:all var(--t) var(--ease);
+  font-family:var(--ff-sans);
+}
+.cf-submit svg{width:18px;height:18px;transition:transform var(--t)}
+.cf-submit:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 12px 40px rgba(191,160,90,.3)}
+.cf-submit:hover svg{transform:translateX(3px)}
+.cf-submit:disabled{opacity:.6;transform:none;box-shadow:none}
+.cf-note{font-size:11px;color:var(--ink-3);text-align:center;line-height:1.6}
+
+/* Success state */
+.cf-success{
+  display:none;text-align:center;padding:60px 32px;
+}
+.cf-success-icon{
+  width:68px;height:68px;border-radius:50%;
+  background:var(--gold-dim);border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;color:var(--gold);margin:0 auto 20px;
+}
+.cf-success h3{font-family:var(--ff-serif);font-size:30px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.cf-success p{font-size:15px;color:var(--ink-2);line-height:1.75;max-width:340px;margin:0 auto}
+
+/* FAQ section */
+.faq-section{
+  background:var(--bg-1);border-top:1px solid var(--border);
+  padding:80px 0;
+}
+.faq-inner{max-width:var(--max);margin:0 auto;padding:0 32px}
+.faq-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;
+}
+.faq-card{
+  padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);
+  transition:border-color var(--t);
+}
+.faq-card:hover{border-color:var(--border-h)}
+.faq-q{
+  font-family:var(--ff-serif);font-size:18px;font-weight:700;
+  color:var(--ink);letter-spacing:-.01em;margin-bottom:10px;line-height:1.3;
+}
+.faq-a{font-size:13px;line-height:1.75;color:var(--ink-2)}
+
+/* CTA band */
+.cta-band{
+  background:var(--bg);border-top:1px solid var(--border);
+  padding:80px 0;
+}
+.cta-band-inner{
+  max-width:760px;margin:0 auto;padding:0 32px;
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;
+}
+.cta-band-title{
+  font-family:var(--ff-serif);font-size:clamp(28px,4vw,48px);
+  font-weight:700;line-height:1.1;letter-spacing:-.03em;color:var(--ink);
+}
+.cta-band-title em{color:var(--gold);font-style:italic}
+.cta-band-sub{font-size:16px;line-height:1.8;color:var(--ink-2);max-width:460px}
+.cta-band-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+
+/* ── RESPONSIVE: contact page ── */
+@media(max-width:1100px){
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .contact-form-wrap{padding:36px}
+}
+@media(max-width:900px){
+  .faq-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .page-hero{padding:130px 0 70px}
+  .page-hero-inner{padding:0 20px}
+  .page-hero::after{display:none}
+  .contact-section{padding:72px 0}
+  .contact-grid{padding:0 20px;gap:36px}
+  .cf-row{grid-template-columns:1fr}
+  .contact-form-wrap{padding:24px 20px}
+  .faq-inner{padding:0 20px}
+  .cta-band-inner{padding:0 20px}
+  .social-grid{grid-template-columns:1fr}
+}
+</style>
+<title>Contact — Money and Meaning</title>
 </head>
 <body>
 
-<div id="loader">
-  <div class="loader-logo">M&amp;M</div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-ring" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="163" stroke-dashoffset="163" class="loader-arc"/></svg>
+    <span class="loader-wordmark">M&amp;M</span>
+  </div>
 </div>
 
-<header class="navbar" id="navbar">
-  <div class="nav-inner">
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <div class="logo-badge">M&amp;M</div>
-      <span class="logo-name">Money <span>&amp;</span> Meaning</span>
+      <span class="nav-logo-mark">◆</span>
+      <span class="nav-logo-text">Money <em>&amp;</em> Meaning</span>
     </a>
-    <nav class="nav-links">
-      <a href="index.html"    class="nav-link">Home</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#featured" class="nav-link">Insights</a>
+      <a href="index.html#categories" class="nav-link">Topics</a>
       <a href="articles.html" class="nav-link">Articles</a>
-      <a href="about.html"    class="nav-link">About</a>
-      <a href="contact.html"  class="nav-link active">Contact</a>
+      <a href="contact.html" class="nav-link" style="color:var(--ink)">Contact</a>
     </nav>
-    <div class="nav-right">
-      <a href="index.html#newsletter" class="btn btn-gold" style="padding:10px 20px;font-size:12px">Subscribe</a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
+    <div class="nav-end">
+      <a href="index.html#newsletter" class="nav-cta">Subscribe Free</a>
+      <button class="nav-burger" id="burger" aria-label="menu">
+        <span></span><span></span>
       </button>
     </div>
   </div>
+  <div class="nav-drawer" id="drawer">
+    <a href="index.html">Home</a>
+    <a href="index.html#featured">Insights</a>
+    <a href="index.html#categories">Topics</a>
+    <a href="articles.html">Articles</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html#newsletter" class="drawer-cta">Subscribe — It's Free</a>
+  </div>
 </header>
 
-<nav class="mobile-nav" id="mobileNav">
-  <a href="index.html">Home</a>
-  <a href="articles.html">Articles</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="index.html#newsletter" class="mobile-cta">Subscribe Free</a>
-</nav>
-
-<!-- PAGE HERO -->
+<!-- ═══════ PAGE HERO ═══════ -->
 <section class="page-hero">
   <div class="page-hero-inner">
-    <span class="label">Get in Touch</span>
-    <h1 class="page-hero-title">Contact Us</h1>
-    <p class="page-hero-sub">Pitch a story, share feedback, flag an error, or explore a collaboration. We read everything and reply to most things.</p>
+    <div class="page-hero-kicker" data-reveal>Get in Touch</div>
+    <h1 class="page-hero-title" data-reveal data-delay="1">
+      Let's<br><em>Talk</em>
+    </h1>
+    <p class="page-hero-sub" data-reveal data-delay="2">
+      Whether you have a story idea, a question about something we've published, a collaboration proposal, or simply want to say hello — we read every message and reply to most of them.
+    </p>
   </div>
 </section>
 
-<!-- CONTACT LAYOUT -->
-<section class="sec" style="background:var(--bg)">
-  <div class="wrap">
-    <div class="contact-grid">
+<!-- ═══════ CONTACT GRID ═══════ -->
+<section class="contact-section">
+  <div class="contact-grid">
 
-      <!-- Left: options -->
-      <div class="contact-info reveal">
-        <h2 style="font-family:var(--ff-display);font-size:28px;font-weight:700;color:var(--ink);margin-bottom:10px;letter-spacing:-.03em">We'd love to hear from you.</h2>
-        <p style="font-size:15px;line-height:1.8;color:var(--ink-2);margin-bottom:32px">Whether you want to pitch a story, respond to something we published, flag a factual error, or explore a thoughtful partnership — you're in the right place.</p>
+    <!-- Left: info + cards + socials -->
+    <div class="contact-left">
 
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div class="c-option">
-            <div class="c-opt-icon">✍️</div>
-            <div>
-              <div class="c-opt-title">Pitch a Story</div>
-              <p class="c-opt-desc">Writers are welcome. Send a short pitch (200 words max) — your idea, your angle, and why it belongs on Money and Meaning. We aim to respond within 5 business days.</p>
-            </div>
-          </div>
-          <div class="c-option">
-            <div class="c-opt-icon">📬</div>
-            <div>
-              <div class="c-opt-title">Reader Feedback</div>
-              <p class="c-opt-desc">Did we get something wrong? Did something resonate deeply? Tell us. We read every message from readers — it shapes what we write next.</p>
-            </div>
-          </div>
-          <div class="c-option">
-            <div class="c-opt-icon">🤝</div>
-            <div>
-              <div class="c-opt-title">Partnerships</div>
-              <p class="c-opt-desc">We don't accept sponsored content. But we're open to thoughtful event collaborations and institutional partnerships that are genuinely aligned with our editorial values.</p>
-            </div>
-          </div>
-          <div class="c-option">
-            <div class="c-opt-icon">⚠️</div>
-            <div>
-              <div class="c-opt-title">Corrections</div>
-              <p class="c-opt-desc">We take accuracy seriously. If you've spotted a factual error, please reach out immediately. We'll review and correct promptly with full transparency.</p>
-            </div>
+      <div class="contact-intro" data-reveal>
+        <h2>We'd love to<br><em>hear from you.</em></h2>
+        <p>Money and Meaning is a small, independent publication. When you write to us, it goes to a real person — not a support ticket. We welcome pitches, feedback, corrections, and genuine conversation about the ideas we cover.</p>
+      </div>
+
+      <div class="contact-cards" data-reveal data-delay="1">
+        <div class="contact-card">
+          <div class="cc-icon">✉</div>
+          <div class="cc-body">
+            <div class="cc-label">Email Us</div>
+            <div class="cc-value">hello@moneyandmeaning.com</div>
+            <div class="cc-sub">For editorial enquiries, pitches, and general questions</div>
           </div>
         </div>
-
-        <!-- Socials -->
-        <div style="margin-top:36px;padding-top:28px;border-top:1px solid var(--border)">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px">Also find us on</div>
-          <div style="display:flex;gap:10px">
-            <a href="#" class="soc-btn" aria-label="Twitter/X">𝕏</a>
-            <a href="#" class="soc-btn" aria-label="LinkedIn">in</a>
-            <a href="#" class="soc-btn" aria-label="Substack">S</a>
-            <a href="#" class="soc-btn" aria-label="YouTube">▶</a>
+        <div class="contact-card">
+          <div class="cc-icon">✍</div>
+          <div class="cc-body">
+            <div class="cc-label">Story Pitches</div>
+            <div class="cc-value">pitches@moneyandmeaning.com</div>
+            <div class="cc-sub">Have a story idea? Tell us your angle in 200 words or fewer</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">⏱</div>
+          <div class="cc-body">
+            <div class="cc-label">Response Time</div>
+            <div class="cc-value">2–3 Business Days</div>
+            <div class="cc-sub">We read everything. We reply to most. Patience appreciated.</div>
           </div>
         </div>
       </div>
 
-      <!-- Right: form -->
-      <div class="reveal reveal-d1">
-        <div class="contact-form-box">
-          <form class="cf" id="cfForm">
-            <div class="cf-row">
-              <div class="cf-field">
-                <label for="cfName">Full Name</label>
-                <input type="text" id="cfName" name="name" placeholder="Your full name" required autocomplete="name"/>
-              </div>
-              <div class="cf-field">
-                <label for="cfEmail">Email Address</label>
-                <input type="email" id="cfEmail" name="email" placeholder="your@email.com" required autocomplete="email"/>
-              </div>
+      <!-- Social links -->
+      <div class="social-section" data-reveal data-delay="2">
+        <div class="social-label">Follow Our Work</div>
+        <div class="social-grid">
+          <a href="#" class="social-card">
+            <div class="sc-icon">𝕏</div>
+            <div class="sc-info">
+              <span class="sc-name">Twitter / X</span>
+              <span class="sc-handle">@moneyandmeaning</span>
             </div>
-
-            <div class="cf-field">
-              <label for="cfSubject">Reason for Reaching Out</label>
-              <select id="cfSubject" name="subject" required>
-                <option value="" disabled selected>Select a reason…</option>
-                <option value="pitch">Story Pitch</option>
-                <option value="feedback">Reader Feedback</option>
-                <option value="correction">Factual Correction</option>
-                <option value="partnership">Partnership Enquiry</option>
-                <option value="press">Press / Media</option>
-                <option value="other">Something Else</option>
-              </select>
+          </a>
+          <a href="#" class="social-card">
+            <div class="sc-icon">in</div>
+            <div class="sc-info">
+              <span class="sc-name">LinkedIn</span>
+              <span class="sc-handle">Money and Meaning</span>
             </div>
-
-            <div class="cf-field">
-              <label for="cfMessage">Your Message</label>
-              <textarea
-                id="cfMessage"
-                name="message"
-                rows="7"
-                placeholder="Tell us what's on your mind. For story pitches, include your angle and why it fits Money and Meaning's editorial voice."
-                required
-              ></textarea>
+          </a>
+          <a href="#" class="social-card">
+            <div class="sc-icon">◉</div>
+            <div class="sc-info">
+              <span class="sc-name">Instagram</span>
+              <span class="sc-handle">@moneyandmeaning</span>
             </div>
-
-            <div class="cf-field">
-              <label for="cfCompany">Publication / Organisation (optional)</label>
-              <input type="text" id="cfCompany" name="company" placeholder="Where you write or work (optional)" autocomplete="organization"/>
+          </a>
+          <a href="#" class="social-card">
+            <div class="sc-icon">▶</div>
+            <div class="sc-info">
+              <span class="sc-name">YouTube</span>
+              <span class="sc-handle">Money and Meaning</span>
             </div>
+          </a>
+        </div>
+      </div>
 
-            <button type="submit" class="cf-submit">
-              <span>Send Message</span>
-              <span>→</span>
-            </button>
-            <p class="cf-note">We typically reply within 2–3 business days. All submissions are read personally.</p>
-          </form>
+    </div><!-- /left -->
 
-          <div class="cf-success" id="cfSuccess">
-            <div class="cf-success-icon">✓</div>
-            <h3>Message sent.</h3>
-            <p>Thank you for reaching out. We'll be in touch within a few days.</p>
+    <!-- Right: contact form -->
+    <div class="contact-form-wrap" data-reveal data-delay="2">
+
+      <div class="cf-header">
+        <h3>Send Us a Message</h3>
+        <p>Fill in the form and we'll get back to you within a few business days.</p>
+      </div>
+
+      <form class="cf-form" id="contactForm">
+
+        <div class="cf-row">
+          <div class="cf-field">
+            <label for="cfName">Your Name</label>
+            <input type="text" id="cfName" name="name" placeholder="First and last name" autocomplete="name" required/>
+          </div>
+          <div class="cf-field">
+            <label for="cfEmail">Email Address</label>
+            <input type="email" id="cfEmail" name="email" placeholder="you@example.com" autocomplete="email" required/>
           </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="sec" style="background:var(--bg-1)">
-  <div class="wrap">
-    <div class="sec-head reveal" style="justify-content:flex-start;flex-direction:column;gap:12px;align-items:flex-start;margin-bottom:48px">
-      <span class="label">Common Questions</span>
-      <h2 class="headline">Before You <em>Write</em></h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px" class="reveal">
-      <div class="c-option" style="flex-direction:column;gap:8px">
-        <div class="c-opt-title">Do you accept unsolicited article submissions?</div>
-        <p class="c-opt-desc">Yes, carefully. We commission most of our content from our existing team, but we do consider pitches from qualified writers. Please read several of our articles before pitching to understand our voice and standards.</p>
-      </div>
-      <div class="c-option" style="flex-direction:column;gap:8px">
-        <div class="c-opt-title">Do you run sponsored content or native advertising?</div>
-        <p class="c-opt-desc">No. We accept no paid placements, affiliate links, or sponsored posts of any kind. Our editorial independence is non-negotiable. We are reader-funded only.</p>
-      </div>
-      <div class="c-option" style="flex-direction:column;gap:8px">
-        <div class="c-opt-title">Can I republish or translate your articles?</div>
-        <p class="c-opt-desc">Please reach out before republishing. We may grant permission for non-commercial use with full attribution. Translation requests are considered case-by-case.</p>
-      </div>
-      <div class="c-option" style="flex-direction:column;gap:8px">
-        <div class="c-opt-title">Is any of your content financial advice?</div>
-        <p class="c-opt-desc">No. All content on Money and Meaning is editorial and educational in nature. Nothing published here constitutes personalised financial, investment, or legal advice. Always consult a qualified professional.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter sec" id="newsletter">
-  <div class="nl-inner">
-    <div class="nl-left reveal">
-      <span class="label">Stay Connected</span>
-      <h2 class="nl-title">The Weekly <em>Brief</em></h2>
-      <p class="nl-desc">The easiest way to stay in touch is the newsletter. One essay every Sunday. 52,000 readers. No noise.</p>
-      <ul class="nl-perks">
-        <li class="nl-perk">Free. Always.</li>
-        <li class="nl-perk">One email per week, no more</li>
-        <li class="nl-perk">Unsubscribe with one click</li>
-      </ul>
-    </div>
-    <div class="nl-form-box reveal reveal-d2">
-      <form class="nl-form" id="nlForm">
-        <div class="nl-field">
-          <label for="nlName">First Name</label>
-          <input type="text" id="nlName" name="name" placeholder="Your first name" required/>
+        <div class="cf-field">
+          <label for="cfSubject">Subject</label>
+          <select id="cfSubject" name="subject" required>
+            <option value="" disabled selected>Select a subject…</option>
+            <option value="general">General Enquiry</option>
+            <option value="pitch">Story Pitch</option>
+            <option value="feedback">Feedback on an Article</option>
+            <option value="correction">Factual Correction</option>
+            <option value="collab">Collaboration Proposal</option>
+            <option value="newsletter">Newsletter Question</option>
+            <option value="other">Something Else</option>
+          </select>
         </div>
-        <div class="nl-field">
-          <label for="nlEmail">Email Address</label>
-          <input type="email" id="nlEmail" name="email" placeholder="your@email.com" required/>
+
+        <div class="cf-field">
+          <label for="cfOrg">Organisation / Publication <span style="color:var(--ink-3);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <input type="text" id="cfOrg" name="organisation" placeholder="Where you work or write"/>
         </div>
-        <button type="submit" class="nl-submit"><span>Subscribe — It's Free</span><span>→</span></button>
-        <p class="nl-note">No spam. Unsubscribe anytime.</p>
+
+        <div class="cf-field">
+          <label for="cfMsg">Message</label>
+          <textarea id="cfMsg" name="message" placeholder="Tell us what's on your mind. For pitches: include your angle, why it fits Money and Meaning, and your background in 200 words or fewer." required id="cfMsg"></textarea>
+          <div class="cf-char-count"><span id="charCount">0</span> / 800 characters</div>
+        </div>
+
+        <button type="submit" class="cf-submit" id="cfSubmit">
+          <span>Send Message</span>
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <p class="cf-note">By submitting this form you agree to our <a href="#" style="color:var(--gold);border-bottom:1px solid rgba(191,160,90,.3)">Privacy Policy</a>. We do not share your data with third parties.</p>
+
       </form>
-      <div class="nl-success" id="nlSuccess">
-        <div class="nl-success-icon">✓</div>
-        <h3>You're in.</h3>
-        <p>First issue this Sunday. Check your inbox.</p>
+
+      <div class="cf-success" id="cfSuccess">
+        <div class="cf-success-icon">✓</div>
+        <h3>Message received.</h3>
+        <p>Thank you for reaching out. We'll read your message carefully and get back to you within 2–3 business days.</p>
       </div>
+
+    </div><!-- /form wrap -->
+
+  </div><!-- /contact-grid -->
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Common Questions</span>
+        <h2 class="section-title">Before You <em>Write</em></h2>
+      </div>
+    </div>
+
+    <div class="faq-grid">
+
+      <div class="faq-card" data-reveal>
+        <div class="faq-q">Do you accept unsolicited article pitches?</div>
+        <p class="faq-a">Yes — selectively. We welcome pitches from experienced writers with clear, original angles on economics, markets, business, or finance. Please read at least three of our existing articles before pitching so your submission reflects our editorial voice and standards. A 150–200 word pitch is ideal.</p>
+      </div>
+
+      <div class="faq-card" data-reveal data-delay="1">
+        <div class="faq-q">Is Money and Meaning open to sponsored content?</div>
+        <p class="faq-a">No. We do not publish sponsored articles, native advertising, or paid editorial of any kind. Our independence is the foundation of our editorial credibility. If you would like to reach our audience, please look elsewhere — we aren't the right fit.</p>
+      </div>
+
+      <div class="faq-card" data-reveal>
+        <div class="faq-q">I found a factual error. What should I do?</div>
+        <p class="faq-a">Please contact us immediately using the form above or by emailing hello@moneyandmeaning.com. We take accuracy seriously. If an error is confirmed, we issue a correction prominently on the original article and acknowledge the reader who flagged it.</p>
+      </div>
+
+      <div class="faq-card" data-reveal data-delay="1">
+        <div class="faq-q">Can I republish or translate a Money and Meaning article?</div>
+        <p class="faq-a">Please contact us before republishing or translating. We consider each request individually. Non-commercial republication with full attribution and a link to the original is sometimes permitted. Commercial use always requires explicit written permission.</p>
+      </div>
+
+      <div class="faq-card" data-reveal>
+        <div class="faq-q">Is any of your content financial advice?</div>
+        <p class="faq-a">No. Everything published on Money and Meaning is editorial and educational content only. Nothing we publish constitutes personalised financial, investment, tax, or legal advice. Always consult a qualified professional before making any financial decision.</p>
+      </div>
+
+      <div class="faq-card" data-reveal data-delay="1">
+        <div class="faq-q">How do I manage or cancel my newsletter subscription?</div>
+        <p class="faq-a">Every newsletter email includes a one-click unsubscribe link at the bottom. You can also email us directly and we'll remove you from our list immediately. We do not make unsubscribing difficult — ever.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- ═══════ CTA BAND ═══════ -->
+<div class="cta-band">
+  <div class="cta-band-inner" data-reveal>
+    <span class="eyebrow">Free Newsletter</span>
+    <h2 class="cta-band-title">Stay Informed With<br><em>One Great Read</em> a Week</h2>
+    <p class="cta-band-sub">Join 50,000+ readers who receive one carefully written article every week on economics, markets, and business. Free, always.</p>
+    <div class="cta-band-actions">
+      <a href="index.html#newsletter" class="btn-primary">
+        <span>Subscribe Free</span>
+        <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="articles.html" class="btn-ghost">Browse Articles</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
+  <div class="footer-top">
+    <div class="container footer-top-inner">
       <div class="footer-brand">
-        <a href="index.html" class="f-logo">Money <span>&amp;</span> Meaning</a>
-        <p class="f-desc">Intelligent writing on finance, investing, economics, and the ideas that shape a purposeful life.</p>
-        <div class="f-social">
-          <a href="#" class="soc-btn">𝕏</a>
-          <a href="#" class="soc-btn">in</a>
-          <a href="#" class="soc-btn">S</a>
-          <a href="#" class="soc-btn">▶</a>
+        <a href="index.html" class="footer-logo">
+          <span class="footer-logo-mark">◆</span>
+          Money <em>&amp;</em> Meaning
+        </a>
+        <p class="footer-tagline">Economics, Markets, Business, and Ideas shaping the modern world — written independently, clearly, and without agenda.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter/X" class="social-btn">𝕏</a>
+          <a href="#" aria-label="LinkedIn" class="social-btn">in</a>
+          <a href="#" aria-label="Instagram" class="social-btn">◉</a>
+          <a href="#" aria-label="YouTube" class="social-btn">▶</a>
         </div>
       </div>
-      <div>
-        <div class="f-col-title">Topics</div>
-        <ul class="f-links">
-          <li><a href="articles.html">Investing</a></li>
-          <li><a href="articles.html">Economics</a></li>
-          <li><a href="articles.html">Business</a></li>
-          <li><a href="articles.html">Psychology</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="f-col-title">Site</div>
-        <ul class="f-links">
-          <li><a href="about.html">About</a></li>
-          <li><a href="articles.html">Articles</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="#">Privacy</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="f-col-title">Newsletter</div>
-        <p class="f-nl-desc">The Weekly Brief — every Sunday.</p>
-        <div class="f-nl-row">
-          <input type="email" class="f-nl-input" placeholder="Your email"/>
-          <button type="button" class="f-nl-btn">→</button>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="#">Economics</a></li>
+            <li><a href="#">Markets</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Psychology</a></li>
+            <li><a href="#">Big Ideas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="articles.html">All Articles</a></li>
+            <li><a href="index.html#newsletter">Newsletter</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-nl">
+          <h4>Free Weekly Newsletter</h4>
+          <p>One article per week on economics, markets, business, and ideas. Always free.</p>
+          <div class="footer-nl">
+            <input type="email" placeholder="your@email.com" aria-label="Email for newsletter"/>
+            <button type="button" aria-label="Subscribe">→</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="f-copy">© 2024 Money and Meaning. All rights reserved.</p>
-      <div class="f-legal">
-        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Money and Meaning. All rights reserved.</p>
+      <p class="footer-disc">Editorial content only. Not financial advice.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclaimer</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script src="script.js"></script>
+<script>
+/* ── CONTACT PAGE JS ── */
+
+/* Character counter for textarea */
+(function(){
+  const ta    = document.getElementById('cfMsg');
+  const count = document.getElementById('charCount');
+  if(!ta||!count) return;
+  ta.addEventListener('input',()=>{
+    const n = ta.value.length;
+    count.textContent = n;
+    count.style.color = n > 750 ? 'var(--gold)' : '';
+  });
+})();
+
+/* Contact form submit */
+(function(){
+  const form    = document.getElementById('contactForm');
+  const success = document.getElementById('cfSuccess');
+  const submitBtn = document.getElementById('cfSubmit');
+  if(!form||!success) return;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.querySelector('span').textContent = 'Sending…';
+
+    setTimeout(()=>{
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }, 1000);
+  });
+})();
+
+/* Footer newsletter mini forms */
+(function(){
+  document.querySelectorAll('.footer-nl button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const inp=btn.previousElementSibling;
+      if(!inp||!inp.value.trim()){if(inp)inp.focus();return;}
+      btn.textContent='✓';btn.style.background='#2d6a4f';
+      inp.disabled=true;inp.value='';inp.placeholder='Subscribed!';btn.disabled=true;
+    });
+  });
+})();
+</script>
 </body>
 </html>
