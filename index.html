@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Money and Meaning — intelligent writing on investing, economics, business, and the philosophy of building wealth with purpose."/>
+<meta property="og:title" content="Money and Meaning"/>
+<meta property="og:description" content="Where finance meets philosophy. Premium editorial on investing, economics, and purposeful wealth."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<title>Money and Meaning — Finance with Purpose</title>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-ring" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="163" stroke-dashoffset="163" class="loader-arc"/></svg>
+    <span class="loader-wordmark">M&amp;M</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-mark">◆</span>
+      <span class="nav-logo-text">Money <em>&amp;</em> Meaning</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#featured" class="nav-link">Insights</a>
+      <a href="#categories" class="nav-link">Topics</a>
+      <a href="#articles" class="nav-link">Articles</a>
+      <a href="#newsletter" class="nav-link">Newsletter</a>
+    </nav>
+    <div class="nav-end">
+      <a href="#newsletter" class="nav-cta">Subscribe Free</a>
+      <button class="nav-burger" id="burger" aria-label="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- mobile drawer -->
+  <div class="nav-drawer" id="drawer">
+    <a href="#featured">Insights</a>
+    <a href="#categories">Topics</a>
+    <a href="#articles">Articles</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#newsletter" class="drawer-cta">Subscribe — It's Free</a>
+  </div>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-mesh"></div>
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-kicker" data-reveal>
+        <span class="kicker-dot"></span>
+        <span>Premium Finance Editorial</span>
+      </div>
+
+      <h1 class="hero-headline" data-reveal data-delay="1">
+        Where <em>Finance</em><br>
+        Finds Its<br>
+        <em>Purpose</em>
+      </h1>
+
+      <p class="hero-sub" data-reveal data-delay="2">
+        Intelligent, independent writing on investing, economics, and business — for people who want to build wealth without losing sight of why it matters.
+      </p>
+
+      <div class="hero-actions" data-reveal data-delay="3">
+        <a href="#featured" class="btn-primary">
+          <span>Explore Insights</span>
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#newsletter" class="btn-ghost">Join 52,000 Readers</a>
+      </div>
+
+      <div class="hero-proof" data-reveal data-delay="4">
+        <div class="proof-item">
+          <strong>52K+</strong><span>Monthly Readers</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <strong>300+</strong><span>Deep Dives</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <strong>6 Yrs</strong><span>Publishing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right" data-reveal data-delay="2">
+      <!-- Feature card -->
+      <div class="hero-card">
+        <div class="hc-image">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&auto=format" alt="Global markets" loading="eager"/>
+          <div class="hc-overlay"></div>
+          <span class="hc-badge">Editor's Pick</span>
+        </div>
+        <div class="hc-body">
+          <span class="hc-cat">Investing</span>
+          <h3 class="hc-title">The Compounding Effect Nobody Talks About: Time, Patience, and the Wealth Gap</h3>
+          <p class="hc-excerpt">Beyond returns — how the ultra-wealthy really leverage compounding, and what decades of behavioral research reveals for the rest of us.</p>
+          <div class="hc-meta">
+            <img class="hc-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&q=80&auto=format" alt="James Okafor"/>
+            <span class="hc-author">James Okafor</span>
+            <span class="hc-sep">·</span>
+            <span class="hc-read">9 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating chips -->
+      <div class="hero-chip hero-chip--1" data-reveal data-delay="4">
+        <span class="chip-icon">📈</span>
+        <div><strong>S&amp;P 500</strong><em>+18.4% YTD</em></div>
+      </div>
+      <div class="hero-chip hero-chip--2" data-reveal data-delay="5">
+        <span class="chip-icon">💡</span>
+        <div><strong>New Essay</strong><em>Published Today</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Global Markets</span><span class="mx">◆</span>
+    <span>Behavioral Finance</span><span class="mx">◆</span>
+    <span>Central Bank Policy</span><span class="mx">◆</span>
+    <span>Portfolio Strategy</span><span class="mx">◆</span>
+    <span>Inflation &amp; Wealth</span><span class="mx">◆</span>
+    <span>The 4% Rule</span><span class="mx">◆</span>
+    <span>Entrepreneurship</span><span class="mx">◆</span>
+    <span>Macro Economics</span><span class="mx">◆</span>
+    <span>ESG &amp; Values</span><span class="mx">◆</span>
+    <span>Global Markets</span><span class="mx">◆</span>
+    <span>Behavioral Finance</span><span class="mx">◆</span>
+    <span>Central Bank Policy</span><span class="mx">◆</span>
+    <span>Portfolio Strategy</span><span class="mx">◆</span>
+    <span>Inflation &amp; Wealth</span><span class="mx">◆</span>
+    <span>The 4% Rule</span><span class="mx">◆</span>
+    <span>Entrepreneurship</span><span class="mx">◆</span>
+    <span>Macro Economics</span><span class="mx">◆</span>
+    <span>ESG &amp; Values</span><span class="mx">◆</span>
+  </div>
+</div>
+
+<!-- ═══════ FEATURED INSIGHTS ═══════ -->
+<section class="section featured" id="featured">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Featured This Week</span>
+        <h2 class="section-title">Ideas Worth<br><em>Your Time</em></h2>
+      </div>
+      <a href="#articles" class="link-arrow">Browse All <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <!-- Mosaic grid -->
+    <div class="feat-mosaic">
+
+      <!-- Main large -->
+      <article class="feat-main" data-reveal>
+        <a href="#" class="feat-link">
+          <div class="feat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&q=80&auto=format" alt="Global finance" loading="lazy"/>
+            <div class="feat-img-overlay"></div>
+            <span class="feat-label">Deep Dive</span>
+          </div>
+          <div class="feat-content">
+            <span class="feat-cat">Economics</span>
+            <h3 class="feat-title-lg">The Quiet Restructuring of Global Finance: What Central Banks Won't Tell You</h3>
+            <p class="feat-excerpt">As reserve currencies shift and digital assets gain institutional footing, the architecture of global wealth is being quietly redrawn. Here's what it means for your next decade.</p>
+            <div class="feat-meta">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=60&q=80&auto=format" alt="Serena Malik" class="feat-avatar"/>
+              <span>Serena Malik</span>
+              <span class="feat-dot">·</span>
+              <span>Nov 12</span>
+              <span class="feat-dot">·</span>
+              <span>14 min</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Side stack -->
+      <div class="feat-stack">
+        <article class="feat-side" data-reveal data-delay="1">
+          <a href="#" class="feat-link">
+            <div class="feat-side-img">
+              <img src="https://images.unsplash.com/photo-1551836022-8b2858c9c69b?w=500&q=80&auto=format" alt="Behavioral finance" loading="lazy"/>
+              <div class="feat-img-overlay"></div>
+            </div>
+            <div class="feat-content">
+              <span class="feat-cat">Psychology</span>
+              <h3 class="feat-title-sm">Why Smart Investors Make Terrible Decisions: Lessons from Behavioral Finance</h3>
+              <div class="feat-meta">
+                <span>David Nwosu</span><span class="feat-dot">·</span><span>8 min</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="feat-side" data-reveal data-delay="2">
+          <a href="#" class="feat-link">
+            <div class="feat-side-img">
+              <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80&auto=format" alt="Business" loading="lazy"/>
+              <div class="feat-img-overlay"></div>
+            </div>
+            <div class="feat-content">
+              <span class="feat-cat">Business</span>
+              <h3 class="feat-title-sm">Why the Smartest Founders Are Saying No to Venture Capital in 2024</h3>
+              <div class="feat-meta">
+                <span>Amara Osei</span><span class="feat-dot">·</span><span>11 min</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CATEGORIES ═══════ -->
+<section class="section categories" id="categories">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Explore by Topic</span>
+        <h2 class="section-title">What Are You<br><em>Thinking About?</em></h2>
+      </div>
+    </div>
+
+    <div class="cat-row">
+      <a href="#" class="cat-tile" data-reveal>
+        <div class="cat-icon">📊</div>
+        <div class="cat-body">
+          <h3>Investing</h3>
+          <p>Markets, portfolios, asset allocation, and the long game of building real wealth.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">42 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="1">
+        <div class="cat-icon">🌐</div>
+        <div class="cat-body">
+          <h3>Economics</h3>
+          <p>Macro forces, policy shifts, inflation, and what drives the global economy.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">38 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="2">
+        <div class="cat-icon">🏢</div>
+        <div class="cat-body">
+          <h3>Business</h3>
+          <p>Strategy, leadership, entrepreneurship, and what makes companies last.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">31 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="3">
+        <div class="cat-icon">🧠</div>
+        <div class="cat-body">
+          <h3>Psychology</h3>
+          <p>Mental models, cognitive biases, and the habits that determine your financial outcomes.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">27 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="4">
+        <div class="cat-icon">💡</div>
+        <div class="cat-body">
+          <h3>Big Ideas</h3>
+          <p>Essays on meaning, purpose, and how money intersects with the life you want.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">24 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ STATISTICS ═══════ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-text" data-reveal>
+      <span class="eyebrow" style="color:var(--gold)">By the Numbers</span>
+      <h2 class="section-title" style="color:#fff">Trusted by Readers<br><em>Who Think Deeply</em></h2>
+      <p>Six years of independent editorial. No advertisers, no sponsors, no agenda — just rigorous thinking on the things that shape financial lives.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box" data-reveal data-delay="1">
+        <span class="stat-num" data-count="52000">0</span>
+        <span class="stat-label">Monthly Readers</span>
+      </div>
+      <div class="stat-box" data-reveal data-delay="2">
+        <span class="stat-num" data-count="300">0</span>
+        <span class="stat-label">Published Articles</span>
+      </div>
+      <div class="stat-box" data-reveal data-delay="3">
+        <span class="stat-num" data-count="6">0</span>
+        <span class="stat-label">Years Publishing</span>
+      </div>
+      <div class="stat-box" data-reveal data-delay="4">
+        <span class="stat-num" data-count="14">0</span>
+        <span class="stat-label">Topic Categories</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ARTICLES ═══════ -->
+<section class="section articles-section" id="articles">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Fresh from the Desk</span>
+        <h2 class="section-title">Latest <em>Articles</em></h2>
+      </div>
+      <a href="#" class="link-arrow">All Articles <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <div class="articles-grid">
+
+      <article class="art-card" data-reveal>
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80&auto=format" alt="Index funds" loading="lazy"/>
+            <span class="art-tag">Investing</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">The Index Fund Revolution Is Over. What Comes Next for Passive Investors?</h3>
+            <p class="art-exc">After two decades of outperformance, index funds face a more complex landscape. Factor investing and direct indexing are reshaping the passive strategy.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">J</div>
+                <span>James Okafor</span>
+              </div>
+              <div class="art-date">Oct 28 · 10 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="1">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80&auto=format" alt="Recession" loading="lazy"/>
+            <span class="art-tag">Economics</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">Recession Signals: How to Read the Economy Without Being Fooled by the News</h3>
+            <p class="art-exc">Yield curves, leading indicators, and the metrics that actually predict downturns — a practical guide for informed citizens and investors alike.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">S</div>
+                <span>Serena Malik</span>
+              </div>
+              <div class="art-date">Oct 22 · 12 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="2">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&auto=format" alt="Financial independence" loading="lazy"/>
+            <span class="art-tag">Big Ideas</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">The Number You Actually Need: Rethinking Financial Independence Beyond the 4% Rule</h3>
+            <p class="art-exc">Financial independence isn't a single number — it's a moving target shaped by lifestyle, values, and what you actually want your time to look like at 55.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">D</div>
+                <span>David Nwosu</span>
+              </div>
+              <div class="art-date">Oct 9 · 15 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal>
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format" alt="ESG" loading="lazy"/>
+            <span class="art-tag">Investing</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">ESG Is Broken. Here's What Responsible Investing Actually Looks Like</h3>
+            <p class="art-exc">The ESG label has been diluted beyond recognition. But the impulse — aligning capital with values — is more important than ever. Where do we go now?</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">R</div>
+                <span>Riya Sharma</span>
+              </div>
+              <div class="art-date">Oct 3 · 11 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="1">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format" alt="Psychology" loading="lazy"/>
+            <span class="art-tag">Psychology</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">Enough: The Philosophy of Knowing When to Stop Accumulating</h3>
+            <p class="art-exc">In a culture that always wants more, the radical act may be deciding what "enough" looks like — and then actually stopping. A meditation on wealth and meaning.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">J</div>
+                <span>James Okafor</span>
+              </div>
+              <div class="art-date">Sep 27 · 7 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="2">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=600&q=80&auto=format" alt="Global wealth" loading="lazy"/>
+            <span class="art-tag">Economics</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">The New Geography of Wealth: Where the Next Generation of Capital Is Being Built</h3>
+            <p class="art-exc">Southeast Asia, West Africa, and the Gulf states are emerging as new centres of capital formation. Here's what it means for global investment strategy.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">A</div>
+                <span>Amara Osei</span>
+              </div>
+              <div class="art-date">Sep 10 · 11 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BREAK -->
+<div class="quote-break">
+  <div class="container">
+    <blockquote class="pullquote" data-reveal>
+      <span class="pq-mark">"</span>
+      The goal isn't to die rich. It's to live well — and understand money well enough that it never stands between you and the life you actually want.
+      <cite>— The Money and Meaning Manifesto</cite>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ═══════ NEWSLETTER ═══════ -->
+<section class="section newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="nl-wrap">
+      <div class="nl-left" data-reveal>
+        <span class="eyebrow">The Weekly Brief</span>
+        <h2 class="nl-title">One Essay.<br>Every Sunday.<br><em>Free, Always.</em></h2>
+        <p class="nl-desc">Join 52,000 readers who receive one carefully written essay on money, markets, or the philosophy of wealth every Sunday morning. No noise. No agenda.</p>
+        <ul class="nl-perks">
+          <li><span class="perk-icon">◆</span> Long-form only — no quick takes</li>
+          <li><span class="perk-icon">◆</span> Zero sponsored content, ever</li>
+          <li><span class="perk-icon">◆</span> 52,000+ thoughtful readers</li>
+          <li><span class="perk-icon">◆</span> Unsubscribe in one click</li>
+        </ul>
+      </div>
+
+      <div class="nl-right" data-reveal data-delay="2">
+        <form class="nl-form" id="nlForm">
+          <div class="nl-form-header">
+            <h3>Start Reading</h3>
+            <p>Your first issue arrives this Sunday.</p>
+          </div>
+          <div class="nl-fields">
+            <div class="nl-field">
+              <label for="nlName">First Name</label>
+              <input type="text" id="nlName" name="name" placeholder="e.g. Alex" autocomplete="given-name" required/>
+            </div>
+            <div class="nl-field">
+              <label for="nlEmail">Email Address</label>
+              <input type="email" id="nlEmail" name="email" placeholder="you@example.com" autocomplete="email" required/>
+            </div>
+          </div>
+          <button type="submit" class="nl-btn">
+            <span class="nl-btn-text">Join the Brief — Free</span>
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="nl-privacy">No spam. One email per week. Unsubscribe instantly.</p>
+        </form>
+
+        <div class="nl-success" id="nlSuccess">
+          <div class="nl-success-check">✓</div>
+          <h3>You're in.</h3>
+          <p>Welcome to the Money &amp; Meaning community. Your first essay arrives this Sunday.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container footer-top-inner">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <span class="footer-logo-mark">◆</span>
+          Money <em>&amp;</em> Meaning
+        </a>
+        <p class="footer-tagline">Intelligent, independent writing on finance, investing, economics, and the ideas that shape a life of purpose and prosperity.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter/X" class="social-btn">𝕏</a>
+          <a href="#" aria-label="LinkedIn" class="social-btn">in</a>
+          <a href="#" aria-label="Substack" class="social-btn">S</a>
+          <a href="#" aria-label="YouTube" class="social-btn">▶</a>
+        </div>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="#">Investing</a></li>
+            <li><a href="#">Economics</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Psychology</a></li>
+            <li><a href="#">Big Ideas</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Site</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">All Articles</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-nl">
+          <h4>The Weekly Brief</h4>
+          <p>One essay, every Sunday.</p>
+          <div class="footer-nl">
+            <input type="email" placeholder="your@email.com" aria-label="Email for newsletter"/>
+            <button type="button" aria-label="Subscribe">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2024 Money and Meaning. All rights reserved.</p>
+      <p class="footer-disc">Not financial advice. Editorial content only.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
