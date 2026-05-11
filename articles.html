@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Browse all articles on investing, economics, business psychology, and financial philosophy — Money and Meaning."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Reading progress bar */
+    #readProgress{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:9999;width:0;transition:width .1s}
+  </style>
+  <title>Articles — Money and Meaning</title>
+</head>
+<body>
+
+<div id="readProgress"></div>
+
+<div id="loader">
+  <div class="loader-logo">M&amp;M</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-badge">M&amp;M</div>
+      <span class="logo-name">Money <span>&amp;</span> Meaning</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html"    class="nav-link">Home</a>
+      <a href="articles.html" class="nav-link active">Articles</a>
+      <a href="about.html"    class="nav-link">About</a>
+      <a href="contact.html"  class="nav-link">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a href="index.html#newsletter" class="btn btn-gold" style="padding:10px 20px;font-size:12px">Subscribe</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="articles.html">Articles</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="index.html#newsletter" class="mobile-cta">Subscribe Free</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="label">The Archive</span>
+    <h1 class="page-hero-title">All Articles</h1>
+    <p class="page-hero-sub">300+ essays on finance, investing, economics, and the philosophy of a life well-lived financially. Read deeply. Think clearly.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All Topics</button>
+    <button class="filter-btn" data-filter="investing">Investing</button>
+    <button class="filter-btn" data-filter="economics">Economics</button>
+    <button class="filter-btn" data-filter="business">Business</button>
+    <button class="filter-btn" data-filter="psychology">Psychology</button>
+    <button class="filter-btn" data-filter="big-ideas">Big Ideas</button>
+    <button class="filter-btn" data-filter="careers">Careers</button>
+  </div>
+</div>
+
+<!-- ARTICLES GRID -->
+<section class="sec" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="blog-grid">
+
+      <article class="blog-card reveal" data-cat="investing">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80" alt="Compounding wealth" loading="lazy"/>
+          <span class="blog-card-img-tag">Investing</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The Compounding Effect Nobody Talks About: Time, Patience, and the Wealth Gap</h3>
+          <p class="blog-card-exc">Beyond returns — how the wealthy really use compounding, and what decades of behavioral research can teach the rest of us.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">J</div><span>James Okafor</span></div>
+            <div class="bc-meta"><span>Nov 14, 2024</span><span class="bc-dot">·</span><span>9 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d1" data-cat="economics">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=700&q=80" alt="Global finance" loading="lazy"/>
+          <span class="blog-card-img-tag">Economics</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The Quiet Restructuring of Global Finance: What Central Banks Won't Tell You</h3>
+          <p class="blog-card-exc">Reserve currency shifts, digital assets, and the institutional moves reshaping the architecture of global wealth.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">S</div><span>Serena Malik</span></div>
+            <div class="bc-meta"><span>Nov 12, 2024</span><span class="bc-dot">·</span><span>14 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d2" data-cat="psychology">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1551836022-8b2858c9c69b?w=700&q=80" alt="Behavioral finance" loading="lazy"/>
+          <span class="blog-card-img-tag">Psychology</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">Why Smart Investors Make Terrible Decisions: Lessons from Behavioral Finance</h3>
+          <p class="blog-card-exc">The cognitive biases that consistently sabotage even highly intelligent investors — and the frameworks that actually help.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">D</div><span>David Nwosu</span></div>
+            <div class="bc-meta"><span>Nov 8, 2024</span><span class="bc-dot">·</span><span>8 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal" data-cat="investing">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=700&q=80" alt="Index funds passive" loading="lazy"/>
+          <span class="blog-card-img-tag">Investing</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The Index Fund Revolution Is Over. What Comes Next for Passive Investors?</h3>
+          <p class="blog-card-exc">Factor investing, direct indexing, and the new tools reshaping what passive strategy actually means in the 2020s.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">J</div><span>James Okafor</span></div>
+            <div class="bc-meta"><span>Oct 28, 2024</span><span class="bc-dot">·</span><span>10 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d1" data-cat="economics">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=700&q=80" alt="Recession indicators" loading="lazy"/>
+          <span class="blog-card-img-tag">Economics</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">Recession Signals: How to Read the Economy Without Being Fooled by the News</h3>
+          <p class="blog-card-exc">Yield curves, leading indicators, and the economic metrics that actually predict downturns — a practical guide for informed citizens.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">S</div><span>Serena Malik</span></div>
+            <div class="bc-meta"><span>Oct 22, 2024</span><span class="bc-dot">·</span><span>12 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d2" data-cat="business">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=80" alt="Founders VC" loading="lazy"/>
+          <span class="blog-card-img-tag">Business</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">Why the Smartest Founders Are Saying No to Venture Capital in 2024</h3>
+          <p class="blog-card-exc">Growth-at-all-costs is over. A new generation of entrepreneurs is choosing profitability, ownership, and slower but more durable growth.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">A</div><span>Amara Osei</span></div>
+            <div class="bc-meta"><span>Oct 15, 2024</span><span class="bc-dot">·</span><span>8 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal" data-cat="big-ideas">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=700&q=80" alt="Financial independence" loading="lazy"/>
+          <span class="blog-card-img-tag">Big Ideas</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The Number You Actually Need: Rethinking Financial Independence Beyond the 4% Rule</h3>
+          <p class="blog-card-exc">Financial independence isn't a single number — it's a moving target shaped by lifestyle, values, and what you want your time to look like at 55.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">D</div><span>David Nwosu</span></div>
+            <div class="bc-meta"><span>Oct 9, 2024</span><span class="bc-dot">·</span><span>15 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d1" data-cat="investing">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80" alt="ESG investing" loading="lazy"/>
+          <span class="blog-card-img-tag">Investing</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">ESG Is Broken. Here's What Responsible Investing Actually Looks Like</h3>
+          <p class="blog-card-exc">The ESG label has been diluted beyond recognition. But aligning capital with values is more important than ever. Where do we go from here?</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">R</div><span>Riya Sharma</span></div>
+            <div class="bc-meta"><span>Oct 3, 2024</span><span class="bc-dot">·</span><span>11 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d2" data-cat="psychology">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Enough philosophy" loading="lazy"/>
+          <span class="blog-card-img-tag">Psychology</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">Enough: The Philosophy of Knowing When to Stop Accumulating</h3>
+          <p class="blog-card-exc">In a culture that always wants more, the radical act may be deciding what "enough" looks like — and then actually stopping. A meditation on wealth and satisfaction.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">J</div><span>James Okafor</span></div>
+            <div class="bc-meta"><span>Sep 27, 2024</span><span class="bc-dot">·</span><span>7 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal" data-cat="careers">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=700&q=80" alt="Career capital" loading="lazy"/>
+          <span class="blog-card-img-tag">Careers</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The Negotiation Nobody Teaches You: How to Raise Your Salary Without Losing the Room</h3>
+          <p class="blog-card-exc">Research-backed frameworks for the single most high-leverage financial act most people never make — asking for what you're actually worth.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">R</div><span>Riya Sharma</span></div>
+            <div class="bc-meta"><span>Sep 18, 2024</span><span class="bc-dot">·</span><span>9 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d1" data-cat="economics">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=700&q=80" alt="Global wealth geography" loading="lazy"/>
+          <span class="blog-card-img-tag">Economics</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The New Geography of Wealth: Where the Next Generation of Capital Is Being Built</h3>
+          <p class="blog-card-exc">Southeast Asia, West Africa, and the Gulf states are emerging as new centers of capital formation. Here's what that means for global investment strategy.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">A</div><span>Amara Osei</span></div>
+            <div class="bc-meta"><span>Sep 10, 2024</span><span class="bc-dot">·</span><span>11 min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card reveal reveal-d2" data-cat="business">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700&q=80" alt="Business strategy" loading="lazy"/>
+          <span class="blog-card-img-tag">Business</span>
+        </div>
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">The Strategy Most CEOs Get Wrong: Why Vision Without Execution Is Just a Dream</h3>
+          <p class="blog-card-exc">Examining the gap between strategic intent and operational reality — and the systems that close it in organizations that consistently outperform.</p>
+          <div class="blog-card-foot">
+            <div class="bc-author"><div class="bc-ava">A</div><span>Amara Osei</span></div>
+            <div class="bc-meta"><span>Aug 30, 2024</span><span class="bc-dot">·</span><span>13 min</span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination reveal">
+      <button class="pg-btn active">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <span class="pg-ellipsis">…</span>
+      <button class="pg-btn">14</button>
+      <button class="pg-btn" style="padding:0 20px">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER (inline, light version) -->
+<section class="newsletter sec" id="newsletter" style="background:var(--bg-1)">
+  <div class="nl-inner">
+    <div class="nl-left reveal">
+      <span class="label">Never Miss an Issue</span>
+      <h2 class="nl-title">The Weekly <em>Brief</em></h2>
+      <p class="nl-desc">One essay every Sunday. 52,000 readers and counting. No noise, no agenda — just rigorous thinking on the things that matter most financially.</p>
+      <ul class="nl-perks">
+        <li class="nl-perk">Curated insights, not content marketing</li>
+        <li class="nl-perk">Deep dives, not hot takes</li>
+        <li class="nl-perk">Free. Always.</li>
+      </ul>
+    </div>
+    <div class="nl-form-box reveal reveal-d2">
+      <form class="nl-form" id="nlForm">
+        <div class="nl-field">
+          <label for="nlName">First Name</label>
+          <input type="text" id="nlName" name="name" placeholder="Your first name" required/>
+        </div>
+        <div class="nl-field">
+          <label for="nlEmail">Email Address</label>
+          <input type="email" id="nlEmail" name="email" placeholder="your@email.com" required/>
+        </div>
+        <button type="submit" class="nl-submit"><span>Subscribe for Free</span><span>→</span></button>
+        <p class="nl-note">No spam. Unsubscribe anytime.</p>
+      </form>
+      <div class="nl-success" id="nlSuccess">
+        <div class="nl-success-icon">✓</div>
+        <h3>You're in.</h3>
+        <p>First issue arrives this Sunday morning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="f-logo">Money <span>&amp;</span> Meaning</a>
+        <p class="f-desc">Intelligent writing on finance, investing, economics, and the ideas that shape a purposeful life.</p>
+        <div class="f-social">
+          <a href="#" class="soc-btn">𝕏</a>
+          <a href="#" class="soc-btn">in</a>
+          <a href="#" class="soc-btn">S</a>
+          <a href="#" class="soc-btn">▶</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-title">Topics</div>
+        <ul class="f-links">
+          <li><a href="articles.html">Investing</a></li>
+          <li><a href="articles.html">Economics</a></li>
+          <li><a href="articles.html">Business</a></li>
+          <li><a href="articles.html">Psychology</a></li>
+          <li><a href="articles.html">Big Ideas</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title">Site</div>
+        <ul class="f-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="articles.html">Articles</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title">Newsletter</div>
+        <p class="f-nl-desc">The Weekly Brief — one essay every Sunday.</p>
+        <div class="f-nl-row">
+          <input type="email" class="f-nl-input" placeholder="Your email"/>
+          <button type="button" class="f-nl-btn">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="f-copy">© 2024 Money and Meaning. All rights reserved.</p>
+      <div class="f-legal">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
