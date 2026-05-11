@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Money and Meaning — Economics, Markets, Business, and Ideas shaping the modern world. Independent editorial for people who think deeply about finance and its impact on everyday life."/>
+<meta property="og:title" content="Money and Meaning — Economics, Markets & Ideas"/>
+<meta property="og:description" content="Economics, Markets, Business, and Ideas shaping the modern world. Independent editorial on finance, investing, and the forces driving today's economy."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<title>Money and Meaning — Economics, Markets & Ideas</title>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-ring" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="163" stroke-dashoffset="163" class="loader-arc"/></svg>
+    <span class="loader-wordmark">M&amp;M</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-mark">◆</span>
+      <span class="nav-logo-text">Money <em>&amp;</em> Meaning</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#featured" class="nav-link">Insights</a>
+      <a href="#categories" class="nav-link">Topics</a>
+      <a href="#articles" class="nav-link">Articles</a>
+      <a href="#newsletter" class="nav-link">Newsletter</a>
+    </nav>
+    <div class="nav-end">
+      <a href="#newsletter" class="nav-cta">Subscribe Free</a>
+      <button class="nav-burger" id="burger" aria-label="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- mobile drawer -->
+  <div class="nav-drawer" id="drawer">
+    <a href="#featured">Insights</a>
+    <a href="#categories">Topics</a>
+    <a href="#articles">Articles</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#newsletter" class="drawer-cta">Subscribe — It's Free</a>
+  </div>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-mesh"></div>
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-kicker" data-reveal>
+        <span class="kicker-dot"></span>
+        <span>Economics · Markets · Business · Ideas</span>
+      </div>
+
+      <h1 class="hero-headline" data-reveal data-delay="1">
+        Money<br>
+        <em>And</em><br>
+        Meaning
+      </h1>
+
+      <p class="hero-sub" data-reveal data-delay="2">
+        Economics, Markets, Business, and Ideas shaping the modern world — written clearly for people who want to understand what's really happening and why it matters.
+      </p>
+
+      <div class="hero-actions" data-reveal data-delay="3">
+        <a href="#featured" class="btn-primary">
+          <span>Explore Articles</span>
+          <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#categories" class="btn-ghost">About Us</a>
+      </div>
+
+      <div class="hero-proof" data-reveal data-delay="4">
+        <div class="proof-item">
+          <strong>50K+</strong><span>Monthly Readers</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <strong>200+</strong><span>Articles Published</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <strong>Free</strong><span>Always</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right" data-reveal data-delay="2">
+      <!-- Feature card -->
+      <div class="hero-card">
+        <div class="hc-image">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&auto=format" alt="Global markets" loading="eager"/>
+          <div class="hc-overlay"></div>
+          <span class="hc-badge">Editor's Pick</span>
+        </div>
+        <div class="hc-body">
+          <span class="hc-cat">Economics</span>
+          <h3 class="hc-title">Why Inflation Changes Everyday Life More Than Any Government Policy</h3>
+          <p class="hc-excerpt">Inflation isn't just a statistic — it's a silent force that reshapes what you earn, spend, and save. Here's what the numbers hide and what you need to know.</p>
+          <div class="hc-meta">
+            <img class="hc-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&q=80&auto=format" alt="Editor"/>
+            <span class="hc-author">Money &amp; Meaning</span>
+            <span class="hc-sep">·</span>
+            <span class="hc-read">8 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating chips -->
+      <div class="hero-chip hero-chip--1" data-reveal data-delay="4">
+        <span class="chip-icon">🌍</span>
+        <div><strong>Global Markets</strong><em>Analysis Weekly</em></div>
+      </div>
+      <div class="hero-chip hero-chip--2" data-reveal data-delay="5">
+        <span class="chip-icon">📰</span>
+        <div><strong>New Article</strong><em>Published Today</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Global Markets</span><span class="mx">◆</span>
+    <span>Inflation &amp; Everyday Life</span><span class="mx">◆</span>
+    <span>India's Economic Rise</span><span class="mx">◆</span>
+    <span>The Psychology of Wealth</span><span class="mx">◆</span>
+    <span>Understanding Business</span><span class="mx">◆</span>
+    <span>Future of Technology</span><span class="mx">◆</span>
+    <span>Central Bank Policy</span><span class="mx">◆</span>
+    <span>Modern World Analysis</span><span class="mx">◆</span>
+    <span>Money &amp; Meaning</span><span class="mx">◆</span>
+    <span>Global Markets</span><span class="mx">◆</span>
+    <span>Inflation &amp; Everyday Life</span><span class="mx">◆</span>
+    <span>India's Economic Rise</span><span class="mx">◆</span>
+    <span>The Psychology of Wealth</span><span class="mx">◆</span>
+    <span>Understanding Business</span><span class="mx">◆</span>
+    <span>Future of Technology</span><span class="mx">◆</span>
+    <span>Central Bank Policy</span><span class="mx">◆</span>
+    <span>Modern World Analysis</span><span class="mx">◆</span>
+    <span>Money &amp; Meaning</span><span class="mx">◆</span>
+  </div>
+</div>
+
+<!-- ═══════ FEATURED INSIGHTS ═══════ -->
+<section class="section featured" id="featured">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Featured This Week</span>
+        <h2 class="section-title">Stories Worth<br><em>Understanding</em></h2>
+      </div>
+      <a href="#articles" class="link-arrow">See All Articles <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <!-- Mosaic grid -->
+    <div class="feat-mosaic">
+
+      <!-- Main large -->
+      <article class="feat-main" data-reveal>
+        <a href="#" class="feat-link">
+          <div class="feat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&q=80&auto=format" alt="Global economy" loading="lazy"/>
+            <div class="feat-img-overlay"></div>
+            <span class="feat-label">Cover Story</span>
+          </div>
+          <div class="feat-content">
+            <span class="feat-cat">Economics</span>
+            <h3 class="feat-title-lg">India's Economic Future Explained: Why the World's Most Watched Economy Could Reshape Global Markets</h3>
+            <p class="feat-excerpt">India is no longer just an emerging market — it's the world's most consequential economic story of the next two decades. We break down the forces driving its rise, the risks that could slow it, and what it means for global investors and businesses paying attention.</p>
+            <div class="feat-meta">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=60&q=80&auto=format" alt="Editor" class="feat-avatar"/>
+              <span>Money &amp; Meaning</span>
+              <span class="feat-dot">·</span>
+              <span>May 2026</span>
+              <span class="feat-dot">·</span>
+              <span>14 min</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Side stack -->
+      <div class="feat-stack">
+        <article class="feat-side" data-reveal data-delay="1">
+          <a href="#" class="feat-link">
+            <div class="feat-side-img">
+              <img src="https://images.unsplash.com/photo-1551836022-8b2858c9c69b?w=500&q=80&auto=format" alt="Psychology of wealth" loading="lazy"/>
+              <div class="feat-img-overlay"></div>
+            </div>
+            <div class="feat-content">
+              <span class="feat-cat">Psychology</span>
+              <h3 class="feat-title-sm">The Psychology Behind Wealth Creation: Why Your Mindset Matters More Than Your Salary</h3>
+              <div class="feat-meta">
+                <span>Money &amp; Meaning</span><span class="feat-dot">·</span><span>9 min</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="feat-side" data-reveal data-delay="2">
+          <a href="#" class="feat-link">
+            <div class="feat-side-img">
+              <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80&auto=format" alt="Business and technology" loading="lazy"/>
+              <div class="feat-img-overlay"></div>
+            </div>
+            <div class="feat-content">
+              <span class="feat-cat">Business &amp; Technology</span>
+              <h3 class="feat-title-sm">The Future of Business and Technology: What the Next Ten Years Will Look Like for Every Industry</h3>
+              <div class="feat-meta">
+                <span>Money &amp; Meaning</span><span class="feat-dot">·</span><span>12 min</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CATEGORIES ═══════ -->
+<section class="section categories" id="categories">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Explore by Topic</span>
+        <h2 class="section-title">What Are You<br><em>Curious About?</em></h2>
+      </div>
+    </div>
+
+    <div class="cat-row">
+      <a href="#" class="cat-tile" data-reveal>
+        <div class="cat-icon">🌍</div>
+        <div class="cat-body">
+          <h3>Economics</h3>
+          <p>How economies grow, contract, and transform — and what it means for your daily financial reality.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">38 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="1">
+        <div class="cat-icon">📊</div>
+        <div class="cat-body">
+          <h3>Markets</h3>
+          <p>Global markets, asset classes, and the forces that move prices — explained without jargon.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">42 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="2">
+        <div class="cat-icon">🏢</div>
+        <div class="cat-body">
+          <h3>Business</h3>
+          <p>Strategy, leadership, and the mechanics of companies that shape the world around us.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">31 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="3">
+        <div class="cat-icon">🧠</div>
+        <div class="cat-body">
+          <h3>Psychology</h3>
+          <p>The mental models and behavioural patterns that determine how we earn, spend, and build wealth.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">27 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="cat-tile" data-reveal data-delay="4">
+        <div class="cat-icon">💡</div>
+        <div class="cat-body">
+          <h3>Big Ideas</h3>
+          <p>The ideas, thinkers, and trends shaping how the modern world works — and where it's headed.</p>
+        </div>
+        <div class="cat-foot">
+          <span class="cat-count">24 articles</span>
+          <span class="cat-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ STATISTICS ═══════ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-text" data-reveal>
+      <span class="eyebrow" style="color:var(--gold)">By the Numbers</span>
+      <h2 class="section-title" style="color:#fff">Independent Editorial<br><em>You Can Trust</em></h2>
+      <p>Money and Meaning is built on one principle: explain the world honestly, without simplifying what matters or dressing up what doesn't. No sponsors. No agenda. Just clear thinking on economics, markets, and business.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box" data-reveal data-delay="1">
+        <span class="stat-num" data-count="50000">0</span>
+        <span class="stat-label">Monthly Readers</span>
+      </div>
+      <div class="stat-box" data-reveal data-delay="2">
+        <span class="stat-num" data-count="200">0</span>
+        <span class="stat-label">Articles Published</span>
+      </div>
+      <div class="stat-box" data-reveal data-delay="3">
+        <span class="stat-num" data-count="5">0</span>
+        <span class="stat-label">Topic Categories</span>
+      </div>
+      <div class="stat-box" data-reveal data-delay="4">
+        <span class="stat-num" data-count="100">0</span>
+        <span class="stat-label">% Free, Always</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ARTICLES ═══════ -->
+<section class="section articles-section" id="articles">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head-left">
+        <span class="eyebrow">Latest from Money &amp; Meaning</span>
+        <h2 class="section-title">Recent <em>Articles</em></h2>
+      </div>
+      <a href="#" class="link-arrow">All Articles <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <div class="articles-grid">
+
+      <article class="art-card" data-reveal>
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80&auto=format" alt="Inflation" loading="lazy"/>
+            <span class="art-tag">Economics</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">Why Inflation Changes Everyday Life More Than Any Government Policy</h3>
+            <p class="art-exc">Inflation isn't just a number on a chart — it quietly erodes purchasing power, reshapes household decisions, and widens the gap between those who own assets and those who don't. Here's how to think about it clearly.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">M</div>
+                <span>Money &amp; Meaning</span>
+              </div>
+              <div class="art-date">May 2026 · 8 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="1">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&auto=format" alt="India economy" loading="lazy"/>
+            <span class="art-tag">Markets</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">Understanding Global Markets Simply: What Moves Prices and Why It Matters to You</h3>
+            <p class="art-exc">Markets are not random. They respond to information, fear, policy, and human behaviour in patterns that — once you understand them — make the financial world far less mysterious and far more navigable.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">M</div>
+                <span>Money &amp; Meaning</span>
+              </div>
+              <div class="art-date">Apr 2026 · 11 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="2">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&auto=format" alt="Psychology of wealth" loading="lazy"/>
+            <span class="art-tag">Psychology</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">The Psychology Behind Wealth Creation: Why Your Mindset Matters More Than Your Salary</h3>
+            <p class="art-exc">Research consistently shows that income level is a poor predictor of long-term financial outcomes. What actually determines who builds lasting wealth is far more about behaviour, patience, and self-awareness than earnings.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">M</div>
+                <span>Money &amp; Meaning</span>
+              </div>
+              <div class="art-date">Apr 2026 · 10 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal>
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format" alt="Future of business" loading="lazy"/>
+            <span class="art-tag">Business</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">The Future of Business and Technology: What Every Industry Looks Like in 2035</h3>
+            <p class="art-exc">Artificial intelligence, energy transition, and demographic shifts are not distant trends — they are active forces already restructuring how companies operate, compete, and create value. We map what's coming.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">M</div>
+                <span>Money &amp; Meaning</span>
+              </div>
+              <div class="art-date">Mar 2026 · 13 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="1">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format" alt="India economic future" loading="lazy"/>
+            <span class="art-tag">Economics</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">India's Economic Future Explained: The Opportunity, the Risk, and the Reality</h3>
+            <p class="art-exc">With 1.4 billion people, a young workforce, and rapid digital adoption, India's trajectory could define the next chapter of global economic growth. But the path isn't without obstacles — and understanding both sides is essential.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">M</div>
+                <span>Money &amp; Meaning</span>
+              </div>
+              <div class="art-date">Mar 2026 · 14 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="art-card" data-reveal data-delay="2">
+        <a href="#" class="art-card-link">
+          <div class="art-img-wrap">
+            <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=600&q=80&auto=format" alt="Wealth and meaning" loading="lazy"/>
+            <span class="art-tag">Big Ideas</span>
+          </div>
+          <div class="art-body">
+            <h3 class="art-title">What Does Money Actually Mean? A Clear-Eyed Look at Wealth, Freedom, and the Life Well Lived</h3>
+            <p class="art-exc">Beyond the portfolios and the growth metrics lies a more important question: what is money actually for? We explore what financial research, philosophy, and real-world data tell us about money's true relationship with a meaningful life.</p>
+            <div class="art-foot">
+              <div class="art-author">
+                <div class="art-ava">M</div>
+                <span>Money &amp; Meaning</span>
+              </div>
+              <div class="art-date">Feb 2026 · 9 min</div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BREAK -->
+<div class="quote-break">
+  <div class="container">
+    <blockquote class="pullquote" data-reveal>
+      <span class="pq-mark">"</span>
+      Economics is not something that happens to experts in boardrooms. It happens to all of us, every day — in the price of food, the cost of a home, the value of a salary. Understanding it is not optional. It is essential.
+      <cite>— Money and Meaning</cite>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ═══════ NEWSLETTER ═══════ -->
+<section class="section newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="nl-wrap">
+      <div class="nl-left" data-reveal>
+        <span class="eyebrow">Free Weekly Newsletter</span>
+        <h2 class="nl-title">One Read.<br>Every Week.<br><em>Always Free.</em></h2>
+        <p class="nl-desc">Join over 50,000 readers who get one clear, independent article on economics, markets, business, or ideas every week — written to help you understand the world and make better decisions within it.</p>
+        <ul class="nl-perks">
+          <li><span class="perk-icon">◆</span> One article per week — focused and deep</li>
+          <li><span class="perk-icon">◆</span> No sponsored content, no noise</li>
+          <li><span class="perk-icon">◆</span> Economics, markets, business, ideas</li>
+          <li><span class="perk-icon">◆</span> Free forever — unsubscribe anytime</li>
+        </ul>
+      </div>
+
+      <div class="nl-right" data-reveal data-delay="2">
+        <form class="nl-form" id="nlForm">
+          <div class="nl-form-header">
+            <h3>Start Reading Today</h3>
+            <p>Your first article arrives this week.</p>
+          </div>
+          <div class="nl-fields">
+            <div class="nl-field">
+              <label for="nlName">Your Name</label>
+              <input type="text" id="nlName" name="name" placeholder="First name" autocomplete="given-name" required/>
+            </div>
+            <div class="nl-field">
+              <label for="nlEmail">Email Address</label>
+              <input type="email" id="nlEmail" name="email" placeholder="you@example.com" autocomplete="email" required/>
+            </div>
+          </div>
+          <button type="submit" class="nl-btn">
+            <span class="nl-btn-text">Subscribe — It's Free</span>
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="nl-privacy">No spam. One article per week. Unsubscribe in one click.</p>
+        </form>
+
+        <div class="nl-success" id="nlSuccess">
+          <div class="nl-success-check">✓</div>
+          <h3>Welcome aboard.</h3>
+          <p>You're now part of the Money &amp; Meaning community. Your first article is on its way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container footer-top-inner">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <span class="footer-logo-mark">◆</span>
+          Money <em>&amp;</em> Meaning
+        </a>
+        <p class="footer-tagline">Economics, Markets, Business, and Ideas shaping the modern world — written independently, clearly, and without agenda.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter/X" class="social-btn">𝕏</a>
+          <a href="#" aria-label="LinkedIn" class="social-btn">in</a>
+          <a href="#" aria-label="Instagram" class="social-btn">◉</a>
+          <a href="#" aria-label="YouTube" class="social-btn">▶</a>
+        </div>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="#">Economics</a></li>
+            <li><a href="#">Markets</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Psychology</a></li>
+            <li><a href="#">Big Ideas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">All Articles</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-nl">
+          <h4>Free Weekly Newsletter</h4>
+          <p>One article per week on economics, markets, business, and ideas. Always free.</p>
+          <div class="footer-nl">
+            <input type="email" placeholder="your@email.com" aria-label="Email for newsletter"/>
+            <button type="button" aria-label="Subscribe">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Money and Meaning. All rights reserved.</p>
+      <p class="footer-disc">Editorial content only. Not financial advice.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

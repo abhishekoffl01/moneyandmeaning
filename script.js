@@ -1,180 +1,261 @@
 /* ============================================================
    MONEY AND MEANING — script.js
-   All interactivity: loader, navbar, reveals, counters, forms
    ============================================================ */
 
-/* ── 1. LOADING SCREEN ── */
+/* ── LOADER ── */
 window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
-  if (!loader) return;
-  setTimeout(() => loader.classList.add('hidden'), 1800);
-});
-
-/* ── 2. NAVBAR ── */
-const navbar    = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobileNav');
-
-// Scroll → add .scrolled class
-window.addEventListener('scroll', () => {
-  navbar && navbar.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
-
-// Hamburger toggle
-hamburger && hamburger.addEventListener('click', () => {
-  const open = hamburger.classList.toggle('open');
-  mobileNav  && mobileNav.classList.toggle('open', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-});
-
-// Close mobile nav on link click
-mobileNav && mobileNav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    hamburger && hamburger.classList.remove('open');
-    mobileNav.classList.remove('open');
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('out');
     document.body.style.overflow = '';
+  }, 1600);
+});
+document.body.style.overflow = 'hidden';
+
+/* ── CUSTOM CURSOR ── */
+(function () {
+  const dot   = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  if (!dot || !trail || window.matchMedia('(pointer:coarse)').matches) return;
+
+  let tx = 0, ty = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+    dot.style.left   = tx + 'px';
+    dot.style.top    = ty + 'px';
   });
-});
 
-// Close on outside click
-document.addEventListener('click', e => {
-  if (!navbar) return;
-  if (!navbar.contains(e.target) && mobileNav && mobileNav.classList.contains('open')) {
-    hamburger.classList.remove('open');
-    mobileNav.classList.remove('open');
-    document.body.style.overflow = '';
+  (function lerp() {
+    rx += (tx - rx) * .12;
+    ry += (ty - ry) * .12;
+    trail.style.left = rx + 'px';
+    trail.style.top  = ry + 'px';
+    requestAnimationFrame(lerp);
+  })();
+})();
+
+/* ── HERO CANVAS — floating particles ── */
+(function () {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
   }
-});
+  resize();
+  window.addEventListener('resize', resize);
 
-/* ── 3. ACTIVE NAV LINK ── */
-(function highlightNav() {
-  const page   = location.pathname.split('/').pop() || 'index.html';
-  const links  = document.querySelectorAll('.nav-link, .mobile-nav a');
-  links.forEach(link => {
-    const href = link.getAttribute('href') || '';
-    if (href === page || (page === '' && href === 'index.html') ||
-        href.includes(page.replace('.html','')) && href !== '#') {
-      link.classList.add('active');
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x  = Math.random() * W;
+      this.y  = init ? Math.random() * H : H + 10;
+      this.vx = (Math.random() - .5) * .3;
+      this.vy = -(Math.random() * .4 + .15);
+      this.r  = Math.random() * 1.5 + .5;
+      this.o  = Math.random() * .5 + .1;
+      this.life = 0;
+      this.maxLife = Math.random() * 300 + 150;
     }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.life++;
+      if (this.life > this.maxLife || this.y < -10) this.reset(false);
+    }
+    draw() {
+      const progress = this.life / this.maxLife;
+      const alpha = progress < .1
+        ? (progress / .1) * this.o
+        : progress > .8
+          ? ((1 - progress) / .2) * this.o
+          : this.o;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(191,160,90,${alpha})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+  (function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ── NAVBAR STICKY ── */
+(function () {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('stuck', window.scrollY > 60);
+  }, { passive: true });
+})();
+
+/* ── MOBILE MENU ── */
+(function () {
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('drawer');
+  if (!burger || !drawer) return;
+
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    drawer.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
   });
 })();
 
-/* ── 4. SCROLL REVEAL ── */
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('[data-reveal]');
+  if (!els.length) return;
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ── COUNTER ANIMATION ── */
+(function () {
+  const nums = document.querySelectorAll('[data-count]');
+  if (!nums.length) return;
+
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function animateCount(el) {
+    const target   = parseInt(el.dataset.count, 10);
+    const duration = 1800;
+    const suffix   = target >= 1000 ? 'K+' : target >= 10 ? '+' : '';
+    const display  = target >= 1000 ? Math.round(target / 1000) : target;
+    const start    = performance.now();
+
+    function tick(now) {
+      const p   = Math.min((now - start) / duration, 1);
+      const val = Math.round(ease(p) * display);
+      el.textContent = p < 1 ? val.toLocaleString() : display.toLocaleString() + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+
+  nums.forEach(el => obs.observe(el));
+})();
+
+/* ── SMOOTH ANCHOR SCROLL ── */
+(function () {
+  const nav = document.getElementById('nav');
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      const offset = (nav ? nav.offsetHeight : 0) + 16;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    });
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+})();
 
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+/* ── NEWSLETTER FORM ── */
+(function () {
+  const form    = document.getElementById('nlForm');
+  const success = document.getElementById('nlSuccess');
+  if (!form || !success) return;
 
-/* ── 5. STATS COUNTER ── */
-function countUp(el) {
-  const target   = parseInt(el.dataset.count, 10);
-  const duration = 1800;
-  const start    = performance.now();
-  const tick = now => {
-    const p   = Math.min((now - start) / duration, 1);
-    const val = Math.round(easeOutCubic(p) * target);
-    el.textContent = val.toLocaleString();
-    if (p < 1) requestAnimationFrame(tick);
-    else el.textContent = target.toLocaleString();
-  };
-  requestAnimationFrame(tick);
-}
-function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
-
-const counterObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { countUp(e.target); counterObs.unobserve(e.target); }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
-
-/* ── 6. SMOOTH ANCHOR SCROLL ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    if (id === '#') return;
-    const target = document.querySelector(id);
-    if (!target) return;
-    e.preventDefault();
-    const offset = (navbar ? navbar.offsetHeight : 0) + 16;
-    window.scrollTo({ top: target.getBoundingClientRect().top + scrollY - offset, behavior: 'smooth' });
-  });
-});
-
-/* ── 7. NEWSLETTER FORM ── */
-function setupNlForm(formId, successId) {
-  const form    = document.getElementById(formId);
-  const success = document.getElementById(successId);
-  if (!form) return;
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const btn = form.querySelector('button[type="submit"],.nl-submit,.cf-submit');
-    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    const btn = form.querySelector('.nl-btn');
+    if (btn) { btn.disabled = true; btn.querySelector('.nl-btn-text').textContent = 'Subscribing…'; }
     setTimeout(() => {
       form.style.display = 'none';
-      if (success) success.style.display = 'block';
+      success.style.display = 'block';
     }, 900);
   });
-}
-setupNlForm('nlForm',  'nlSuccess');
-setupNlForm('cfForm',  'cfSuccess');
+})();
 
-// Footer mini forms
-document.querySelectorAll('.f-nl-row').forEach(row => {
-  const form = row.closest('form') || row.parentElement;
-  const btn  = row.querySelector('.f-nl-btn');
-  const inp  = row.querySelector('.f-nl-input');
+/* ── FOOTER MINI FORM ── */
+(function () {
+  const btn = document.querySelector('.footer-nl button');
+  const inp = document.querySelector('.footer-nl input');
   if (!btn || !inp) return;
+
   btn.addEventListener('click', () => {
     if (!inp.value.trim()) { inp.focus(); return; }
     btn.textContent = '✓'; btn.style.background = '#4a9e5c';
-    inp.value = ''; inp.placeholder = 'You\'re subscribed!'; inp.disabled = true; btn.disabled = true;
+    inp.value = ''; inp.placeholder = 'You\'re subscribed!';
+    inp.disabled = true; btn.disabled = true;
   });
-});
+})();
 
-/* ── 8. FILTER BUTTONS (articles page) ── */
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    const cards  = document.querySelectorAll('.blog-card');
-    cards.forEach(card => {
-      const cat = card.dataset.cat || '';
-      const show = filter === 'all' || cat === filter;
-      card.style.transition = 'opacity .3s, transform .3s';
-      card.style.opacity    = show ? '1' : '0.25';
-      card.style.pointerEvents = show ? '' : 'none';
-    });
-  });
-});
+/* ── CARD TILT (desktop only) ── */
+(function () {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-/* ── 9. CARD HOVER TILT (subtle, desktop only) ── */
-if (window.matchMedia('(hover: hover)').matches) {
-  document.querySelectorAll('.blog-card, .cat-card, .feat-card').forEach(card => {
+  document.querySelectorAll('.art-card, .cat-tile, .hero-card').forEach(card => {
     card.addEventListener('mousemove', e => {
-      const r   = card.getBoundingClientRect();
-      const x   = ((e.clientX - r.left) / r.width  - 0.5) * 6;
-      const y   = ((e.clientY - r.top)  / r.height - 0.5) * -6;
-      card.style.transform = `translateY(-4px) rotateX(${y}deg) rotateY(${x}deg)`;
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - .5) * 5;
+      const y = ((e.clientY - r.top)  / r.height - .5) * -5;
+      card.style.transform = `translateY(-6px) rotateX(${y}deg) rotateY(${x}deg) perspective(800px)`;
     });
     card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
-}
+})();
 
-/* ── 10. READING PROGRESS (articles page) ── */
-const progress = document.getElementById('readProgress');
-if (progress) {
+/* ── MARQUEE PAUSE ON HOVER ── */
+(function () {
+  const track = document.querySelector('.marquee-track');
+  if (!track) return;
+  const bar = track.closest('.marquee-bar');
+  if (!bar) return;
+  bar.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+  bar.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+})();
+
+/* ── PARALLAX HERO BG (subtle, perf-safe) ── */
+(function () {
+  const hero = document.querySelector('.hero');
+  const mesh = document.querySelector('.hero-mesh');
+  if (!hero || !mesh || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const max = document.body.scrollHeight - innerHeight;
-    progress.style.width = (scrollY / max * 100) + '%';
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        mesh.style.transform = `translateY(${y * .15}px)`;
+      }
+      ticking = false;
+    });
+    ticking = true;
   }, { passive: true });
-}
+})();
 
-/* dev console badge */
-console.log('%c Money & Meaning ','background:#C9A84C;color:#080808;font-weight:700;padding:6px 14px;font-size:13px;border-radius:4px');
+/* dev badge */
+console.log('%c ◆ Money & Meaning ', 'background:#BFA05A;color:#07070A;font-weight:800;padding:6px 14px;font-size:14px;border-radius:4px;font-family:serif');
